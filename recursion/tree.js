@@ -1,7 +1,6 @@
 function tree(n){
     if(n > 0 ){
         console.log(n);
-        debugger
         tree(n-1); // Recursive call
 
         tree(n-1); // Recursive call
