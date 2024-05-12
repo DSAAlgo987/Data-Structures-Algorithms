@@ -12,12 +12,15 @@
 // Global variable
 let x = 0;
 
-function recursive(n){
-    if(n > 0){
-        ++x;
-        return recursive(n-1) * x;
-    }
+// function recursive(n){
+//     if(n > 0){
+//         ++x;
+//         return recursive(n-1) * x;
+//     }
 
-    return 1;
-}
-console.log(recursive(3));
+//     return 1;
+// }
+// console.log(recursive(3));
+
+// Time Complexity : O(n);
+// Space complexity : O(1);
