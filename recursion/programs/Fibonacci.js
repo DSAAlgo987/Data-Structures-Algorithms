@@ -50,11 +50,8 @@ if(n <=0){
     console.log("Enter a positive number.");
 }else if(n === 1 ){
     console.log(s.substring(0 ,1));
-}else if (n === 2){
-    console.log(s);
-}else {
-    console.log(fibonacci(4-2));
-
+} else {
+    console.log(fibonacci(n-2));
 }
 
 function fibonacci(n){
@@ -67,6 +64,3 @@ function fibonacci(n){
     }
     return s;
 }
-
-
-
