@@ -17,4 +17,4 @@ function e(x , n){
     }
 }
 
-console.log(e(4, 10).toFixed(2));
+console.log(e(1, 4).toFixed(2));
