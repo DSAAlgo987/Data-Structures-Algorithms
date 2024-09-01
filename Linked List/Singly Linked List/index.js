@@ -103,21 +103,28 @@ class SinglyLinkedList {
 
 
 let sl1 = new SinglyLinkedList();
-sl1.insertFirst(10);
-sl1.insertFirst(11);
-sl1.insertFirst(12);
-sl1.insertBetween(2 , 2);
-sl1.insertEnd(20);
+sl1.insertFirst(3);
+sl1.insertFirst(3);
+sl1.insertFirst(2);
+sl1.insertFirst(1);
+sl1.insertFirst(1);
+
+
+// sl1.insertBetween(2 , 2);
+// sl1.insertEnd(20);
 
 sl1.printList();
 
-console.log(sl1.getSize());
+sl1.removeDuplicates();
 
-console.log(sl1.sumNodes());
+sl1.printList();
+// console.log(sl1.getSize());
 
-console.log(sl1.getFirst());
+// console.log(sl1.sumNodes());
 
-console.log(sl1.getLast());
+// console.log(sl1.getFirst());
+
+// console.log(sl1.getLast());
 
 
-sl1.clear();
+// sl1.clear();
