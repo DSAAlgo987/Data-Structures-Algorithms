@@ -14,9 +14,9 @@ struct Stack{
 // 1. isEmpty 
 int isEmpty(struct Stack *st){
     if(st->top == -1){
-        return 1;
+        return 1; // 1 true
     }
-    return 0;
+    return 0; // false
 }
 
 
