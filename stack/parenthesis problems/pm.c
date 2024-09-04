@@ -34,19 +34,33 @@ int pop(){
     }
 }
 
+int isMatching(char a , char b){
+    if(a == '(' && b == ')'){
+        return 1;
+    }else if(a == '{' && b == '}'){
+        return 1;
+    }else if(a == '[' && b == ']'){
+        return 1;
+    }
+    return 0;
+}
+
 int isBalanced(char *exp){
     st.size = strlen(exp);
     st.top = -1;
     st.s = (char *)malloc(st.size * sizeof(char));
-
+    char temp;
     for(int i = 0 ; exp[i]!='\0' ; i++){
-        if(exp[i] == '('){
+        if(exp[i] == '{' || exp[i] == '(' || exp[i] == '['){
             push(exp[i]);
-        }else if(exp[i] == ')'){
+        }else if(exp[i] == '}' || exp[i] == ')' || exp[i] == ')'){
             if(isEmpty()){
                 return 0;
             }
-            pop();
+            temp = pop();
+            if(!isMatching( temp , exp[i] )){
+                return 0;
+            }
         }
     }
     //                 T   F 
@@ -54,7 +68,7 @@ int isBalanced(char *exp){
 }
 
 int main(){
-    char exp[] = "((a+b)*(a-b))";
+    char exp[] = "([a+b)*(a-b))";
     
     if(isBalanced(exp)){
         printf("Paranthesis Matched.");
