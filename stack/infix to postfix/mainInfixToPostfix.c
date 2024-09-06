@@ -34,9 +34,8 @@ void push(struct Stack *st , char x){
 }
 
 int pop(struct Stack *st){
-    char x;
     if(!isEmpty(st)){
-        x = st->s[st->top--];
+        return st->s[st->top--];
     }else{
         return -1;
     }
