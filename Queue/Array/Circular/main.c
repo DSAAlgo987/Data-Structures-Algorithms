@@ -8,6 +8,7 @@ struct Queue{
     int *Q;
 };
 
+// time complexity : O(1)
 void enqueue(struct Queue *q , int x){
     if((q->rear +1) %q->size == q->front ){
         printf("Queue is full.");
@@ -18,6 +19,7 @@ void enqueue(struct Queue *q , int x){
     }
 }
 
+// time complexity : O(1)
 int dequeue(struct Queue *q){
     int x = -1;
     if(q->rear == q->front){
