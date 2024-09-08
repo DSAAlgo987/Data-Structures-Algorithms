@@ -18,13 +18,19 @@ This repository contains implementations of various data structures and algorith
 
 ## Data Structures
 
+- [Linked List](./Linked%20List/Singly%20Linked%20List)
+  - Singly Linked List
+  - Doubly Linked List
+  - Circular Linked List
+- [Stack](./stack)
+  - Infix to Postfix
+  - Parenthesis Matching
+  - Evaluation of Postfix
 - [Queue](./Queue)
   - Priority Queue using Linked List
   - Queue using array
-- [Linked List](./Linked%20List/Singly%20Linked%20List)
-  - Singly Linked List
-- [Stack](./stack)
-  - Queue using two Stacks
+  - Queue using Linked List
+  - Queue using Two Stacks
 
 ## Algorithms
 
