@@ -14,7 +14,8 @@ A linked list is a linear data structure where each element is a separate object
 
 ## Introduction
 
-Linked lists are fundamental data structures used in many applications. They provide efficient insertion and deletion operations compared to arrays. This section focuses on the structure and types of linked lists.
+A linked list is a linear data structure which is a collection of multiple nodes. Each node contains two parts: a data part and a next part, which is a pointer that contains the address of the next node. Linked lists are dynamic and can grow and shrink in size by allocating and deallocating memory as needed.
+
 
 ## Types of Linked Lists
 
