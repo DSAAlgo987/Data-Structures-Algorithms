@@ -14,7 +14,8 @@ This repository contains implementations of various data structures and algorith
 3. [Notes](#notes)
 4. [Usage](#usage)
 5. [Contributing](#contributing)
-6. [License](#license)
+6. [Contributors](#contributors)
+7. [License](#license)
 
 ## Data Structures
 
@@ -52,6 +53,10 @@ To run the C programs:
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Contributors
+- [Faisal786111](https://github.com/Faisal786111)
+- [Haruu4304](https://github.com/Haruu4304) (Harsha Surwase)
 
 ## License
 MIT License
