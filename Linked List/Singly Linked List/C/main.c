@@ -425,7 +425,7 @@ int isLoop(struct Node * head){
     return (p==q) ? 1 : 0;
 }
 
-// Time complexity : O(n);
+// Time complexity : O(n^2);
 int middleElement1(struct Node *p){
     int length = 0;
     while (p){
