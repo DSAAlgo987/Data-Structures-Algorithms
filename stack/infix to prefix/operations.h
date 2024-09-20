@@ -131,3 +131,48 @@ char *convert(char *infix){
     return prefix;
 
 }
+
+// TC : O(N) , SC : O(N);
+int palindrome(char *str){
+    int length = strlen(str);
+
+    struct Stack st;
+    st.size = length;
+    st.top = -1;
+    st.s = (char *)malloc(st.size * sizeof(char));
+
+    char rev[length + 1]; // Add null character
+
+    for(int i = 0 ; str[i] !='\0' ; i++){
+        push(&st , str[i]);
+    }
+
+    for(int i = 0 ; i<length ; i++){
+        rev[i] = pop(&st);
+    }
+
+    rev[length] = '\0';
+
+    if(strcmp(str , rev) ==0){
+        return 1;
+    }else {
+        return 0;
+    }
+}
+
+// TC : O(n) , SC : O(1)
+int palindrome2(char *str){
+    int i = 0 ; 
+    int j = strlen(str)-1;
+    
+    
+    while(i < j){
+        if(str[i] != str[j]){
+            return 0; // not a palindrome
+        }
+        i++;
+        j--;
+    }
+    
+    return 1;
+}
