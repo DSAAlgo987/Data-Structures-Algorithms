@@ -24,9 +24,9 @@ This repository contains implementations of various data structures and algorith
   - Doubly Linked List
   - Circular Linked List
 - [Stack](./stack)
-  - Infix to Postfix
+  - Infix to Postfix & Prefix
   - Parenthesis Matching
-  - Evaluation of Postfix
+  - Evaluation of Postfix & Prefix
 - [Queue](./Queue)
   - Priority Queue using Linked List
   - Queue using array
