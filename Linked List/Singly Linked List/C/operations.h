@@ -150,3 +150,47 @@ int avg(){
     return avg = sum / count;
 
 }
+
+// identify length of given linked list
+int length(){
+    struct Node *p = start;
+    int len = 0;
+
+    while(p!=NULL){
+        len++;
+        p = p->next;
+    }
+
+    return len;
+}
+
+// delete node from given position ((1-based indexing)
+void deleteNode(int pos){
+    struct Node *temp = start;
+    struct Node *p = NULL;
+    //Case 1: position less than 1 & pos greater than length of ll
+    if(pos < 1 ||pos > length()){
+        printf("Position is less than 1 or greter than length of linked list");
+    }
+
+    // Case 2 : if ll is empty
+    if(temp == NULL){
+        printf("Linked list is empty");
+    }
+
+    // case 3 : if pos is a first node 
+    if(pos == 1){
+        start = start->next;
+        free(temp);
+    }
+
+    // traverse to temp to the pos;
+    for(int i =1 ; i<pos ; i++){
+        p = temp;
+        temp = temp->next;
+    }
+
+    // case 4 : deleting node in between and at the end;
+    p->next = temp->next;
+    free(temp);
+}

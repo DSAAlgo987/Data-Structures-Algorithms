@@ -5,7 +5,7 @@
 int main()
 {
     // create linked list 
-    // create();
+    create();
     
     // traverse 
     // traverse();
@@ -15,9 +15,8 @@ int main()
     
     // start = reverse(start);
     
-    
-    // traverse();
-    printf("Average : %d" , avg());
-    
+    traverse();
+    deleteNode(3);    
+    traverse();
     return 0;
 }
