@@ -2,6 +2,8 @@
     "files.associations": {
         "stdbool.h": "c",
         "stdio.h": "c",
-        "chains.h": "c"
-    }
+        "chains.h": "c",
+        "operations.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
