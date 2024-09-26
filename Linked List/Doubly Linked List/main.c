@@ -5,7 +5,7 @@ int main() {
     int choice;
 
     while (1) {
-        printf("\n--- Circular Linked List Menu ---\n");
+        printf("\n--- Doubly Linked List Menu ---\n");
         printf("1. Create Circular Linked List\n");
         printf("2. Traverse Circular Linked List\n");
         printf("3. Insert Before\n");
