@@ -1,136 +1,163 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-struct Node{
+struct Node {
     int data;
     struct Node *next;
+    struct Node *prev;
 }*start = NULL;
 
-struct Node *createNode(int data){
-    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
-    temp->data = data;
+struct Node* createNode(int x){
+    struct Node *temp = (struct Node *)malloc(sizeof(struct Node));
+    temp->data = x;
     temp->next = NULL;
+    temp->prev = NULL;
 
     return temp;
 }
 
 void create(){
-    int n , value;
-    struct Node *temp, *newNode;
+    struct Node *temp , *newNode;
+    int n = 5, value;
 
-    // printf("Enter the no of nodes : ");
+    // printf("Enter the no of nodes to insert :");
     // scanf("%d" , &n);
 
-    for(int i = 0 ; i < 5 ; i++){
-        // printf("Enter the value for the Node %d " , i+1);
+    for(int i = 0 ; i < n ; i++){
+        // printf("Enter the value for node %d" , i+1);
         // scanf("%d" , &value);
 
         newNode = createNode(i+1);
+
+        // If LL is not created
         if(start == NULL){
             start = newNode;
-            newNode->next = start; //Circular linked list
-        }else {
+        }else{
             temp = start;
-            while(temp->next != start){
+            while(temp->next != NULL){
                 temp = temp->next;
             }
 
             temp->next = newNode;
-            newNode->next = start;
+            newNode->prev = temp;
         }
     }
 }
 
 void insertBefore(){
-    struct Node *temp , *newNode , *prev , *last;
-    int x =3, value;
-
+    int x = 5 , value = 10;
+    struct Node *newNode , *temp , *prev;
     // printf("Enter the value before which you want to insert : ");
     // scanf("%d" , &x);
 
-    // printf("Enter the value ot insert : ");
+    // printf("Enter the value to insert : ");
     // scanf("%d" , &value);
-
-    newNode = createNode(10);
-
+    newNode = createNode(value);
+    
     temp = start;
     while(temp->data != x){
         prev = temp;
         temp = temp->next;
     }
 
-    // case 1 : if temp first node
+    // case 1 : insert newNode before 1st Node
     if(temp == start){
-        last = temp;
-        while(last->next != start){
-            last = last->next;
-        }
-
-        last->next = newNode;
-        newNode->next = start;
-    }else{ // case 2 : between 
-        prev->next = newNode;
         newNode->next = temp;
+        temp->prev = newNode;
+        start = newNode;
+    }else{
+        // case 2 : insert newNode in between
+        newNode->next = temp;
+        newNode->prev = prev;
+        prev->next = newNode;
+        temp->prev = newNode;
     }
 }
 
 void insertAfter(){
-    struct Node *temp , *newNode;
-    int x = 5 , value;
+    struct Node *newNode , *temp , *post;
+    int x = 5 , value = 10;
 
-    // printf("Enter the value after which you want to insert : ");
+    // printf("Enter the value before which you want to insert : ");
     // scanf("%d" , &x);
 
-    // printf("Enter the value ot insert : ");
+    // printf("Enter the value to insert : ");
     // scanf("%d" , &value);
+    newNode = createNode(value);
 
-    newNode = createNode(15);
-
-    start = temp;
+    temp = start;
     while(temp->data != x){
-        temp=temp->next;
-    }   
+        temp = temp->next;
+    }
 
-    newNode->next = temp->next;
-    temp->next = newNode;    
+    post = temp->next;
+    temp->next = newNode;
+    newNode->prev = temp;
+
+    if(post != NULL){
+        newNode->next = post;
+        post->prev = newNode;
+    }
 }
 
-void deleteElement(){
-    struct Node *temp ,*prev, *last;
-    int x = 1;
+void delete(){
+    struct Node *temp , *post , *prev;
+    int x = 5;
 
-    // printf("Enter the value to delete :");
+    // printf("Enter the value to delete : ");
     // scanf("%d" , &x);
+
     temp = start;
-    while(temp->next != start && temp->data != x){
+    while(temp->next != NULL && temp->data != x){
         prev = temp;
         temp = temp->next;
     }
 
-    if(temp->data !=x){
-        printf("Value not found!\n");
-    }else if(temp == start){// case 2 : if temp is a first node 
-        last = temp;
-        while(last->next != start){
-            last = last->next;
+    // case 1 : valued not found
+    if(temp->data != x){
+        printf("Value not found");
+    }else if(temp == start){  // case 2 : if temp is a first node 
+        post = temp->next;
+        if(post != NULL){
+            start = post;
+            post->prev = NULL;
+        }else{
+            start = NULL; //list becomes empty
         }
-        last->next = temp->next;
-        start = start->next;
         free(temp);
-    }else{
-        prev->next = temp->next;
+        return;
+    }else{// case 3 : if temp is a middle node or last node
+        post = temp->next;
+        if(post!=NULL){
+            prev->next = post;
+            post->prev = prev;
+        }else {
+            prev->next = post; // if it's the last node
+        }
         free(temp);
     }
 }
 
 void traverse(){
-    struct Node *temp = start;
     if(start == NULL){
-        printf("List is empty!");
+        printf("Linked list is empty.");
+        return;
     }
 
-    do{
-        printf("Element : %d\n" , temp->data);
-        temp = temp->next;
-    }while(temp != start);
+    struct Node *p = start;
+    struct Node *last;
+
+    printf("\ntraverse in forward direction : ");
+    // traverse in forward direction
+    while(p != NULL){
+        printf("\nElement : %d" , p->data);
+        last = p;
+        p= p->next;
+    }
+
+    printf("\nTraverse in backward direction : ");
+    // traverse in backward direction(reverse dispaly linked list)
+    while(last != NULL){
+        printf("\n Element : %d", last->data );
+        last = last->prev;
+    }
 }
