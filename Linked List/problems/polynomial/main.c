@@ -6,7 +6,19 @@
 
 int main()
 {
-    createPolynomial();
-    displayPolynomial();
-    return 0;   
+
+	struct Node* first = NULL;
+	struct Node* second = NULL;
+	struct Node* result = NULL;
+
+	printf("\nEnter the corresponding data:-\n");
+	printf("\nFirst polynomial:\n");
+	readPolynomial(&first);
+	displayPolynomial(first);
+	printf("\nSecond polynomial:\n");
+	readPolynomial(&second);
+	displayPolynomial(second);
+	addPolynomials(&result, first, second);
+	displayPolynomial(result);
+	return 0;
 }

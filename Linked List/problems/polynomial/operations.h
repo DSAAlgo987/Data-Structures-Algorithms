@@ -1,66 +1,102 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-struct Node {
-    int coef;
-    int power;
-    struct Node *next;
-}*start = NULL;
+struct Node
+{
+	int coeff;
+	int pow;
+	struct Node* next;
+};
 
-
-struct Node* createNode(int coef , int power ){
-    struct Node *temp = (struct Node *)malloc(sizeof(struct Node));
-    temp->coef = coef;
-    temp->power = power;
-    temp->next = NULL;
-    
-    return temp;
+void readPolynomial(struct Node** poly)
+{
+	int coeff, exp, cont;
+	struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+	*poly = temp;
+	do{
+		printf("\n Coeffecient: ");
+		scanf("%d", &coeff);
+		printf("\n Exponent: ");
+		scanf("%d", &exp);
+		temp->coeff = coeff;
+		temp->pow = exp;
+		temp-> next = NULL;
+		printf("\nHave more terms? 1 for y and 0 for no: ");
+		scanf("%d", &cont);
+		if(cont)
+		{
+			temp->next = (struct Node*)malloc(sizeof(struct Node));
+			temp = temp->next;
+			temp->next = NULL;
+		}
+	}while(cont);	
 }
 
-
-void createPolynomial(){
-    int terms, coef , power;
-    struct Node *newNode , *temp;
-    printf("Enter the no of terms in polynomial : ");
-    scanf("%d" , &terms);
-    
-    for(int i = 0 ; i < terms ; i++){
-        
-        printf("Enter the coeficient for term %d : " , i+1);
-        scanf("%d" , &coef);
-        
-        printf("Enter the power for term %d : " , i+1);
-        scanf("%d" , &power);
-        
-        newNode = createNode(coef , power);
-        
-        if(start == NULL){
-            start = newNode;
-        }else{
-            temp = start;
-            while(temp->next != NULL){
-                temp = temp->next;
-            }
-            
-            newNode->next = temp->next;
-            temp->next = newNode;
-        }
-        
-    }
+void displayPolynomial(struct Node* poly)
+{
+	printf("\nPolynomial expression is: ");
+	while(poly != NULL)
+	{
+		printf("%dX^%d", poly->coeff, poly->pow);
+		poly = poly->next;
+		if(poly != NULL)
+			printf("+");
+	}
 }
 
+void addPolynomials(struct Node** result, struct Node* first, struct Node* second)
+{
+ 	struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+ 	temp->next = NULL;
+ 	*result = temp;
+ 	while(first && second)
+ 	{
+ 		if(first->pow > second->pow)
+ 		{
+ 			temp->coeff = first->coeff;
+ 			temp->pow = first->pow;
+ 			first = first->next;
+ 		}
+ 		else if(first->pow < second->pow)
+ 		{
+ 			temp->coeff = second->coeff;
+ 			temp->pow = second->pow;
+ 			second = second->next;
+ 		}
+ 		else
+ 		{
+ 			temp->coeff = first->coeff + second->coeff;
+ 			temp->pow = first->pow;
+ 			first = first->next;
+ 			second = second->next;
+ 		}
 
-void displayPolynomial(){
-    struct Node *temp=start;
-    while(temp!= NULL){
-        if(temp->coef < 0){
-            printf(" - %dx^%d" , temp->coef , temp->power);
-        }else{
-            if (temp != start) {
-                printf(" + ");  // Add "+" sign between terms, but not before the first term
-            }
-            printf("%dx^%d", temp->coef, temp->power);
-        }
-        temp = temp->next;
-    }
+ 		if(first && second)
+ 		{
+ 			temp->next = (struct Node*)malloc(sizeof(struct Node));
+ 			temp = temp->next;
+ 			temp->next = NULL;
+ 		}
+ 	}
+ 	while(first || second)
+ 	{
+ 		temp->next = (struct Node*)malloc(sizeof(struct Node));
+ 		temp = temp->next;
+ 		temp->next = NULL;
+ 			
+ 		if(first)
+ 		{
+ 			temp->coeff = first->coeff;
+ 			temp->pow = first->pow;
+ 			first = first->next;
+ 		}
+
+ 		else if(second)
+ 		{
+ 			temp->coeff = second->coeff;
+ 			temp->pow = second->pow;
+ 			second = second->next;
+ 		}
+ 	}
 }
+
