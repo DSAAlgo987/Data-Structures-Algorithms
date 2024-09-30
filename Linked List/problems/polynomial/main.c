@@ -1,24 +1,15 @@
 #include <stdio.h>
 #include "operations.h"
-
-// Polynomial : P(x) = 4x^2 + 7x^3 + 8x^5 + 5x^4  + 5x + 5
-// P(x) = 8x^5 + 5x^4 + 7x^3 + 4x^2 + 5x + 5
-
 int main()
 {
+    start1 = create(start1);
+    start2 = create(start2);
 
-	struct Node* first = NULL;
-	struct Node* second = NULL;
-	struct Node* result = NULL;
+    add();    
+    displayPolynomial(result);
+    
+    subtract();
+    displayPolynomial(result);
 
-	printf("\nEnter the corresponding data:-\n");
-	printf("\nFirst polynomial:\n");
-	readPolynomial(&first);
-	displayPolynomial(first);
-	printf("\nSecond polynomial:\n");
-	readPolynomial(&second);
-	displayPolynomial(second);
-	addPolynomials(&result, first, second);
-	displayPolynomial(result);
-	return 0;
+    return 0;
 }
