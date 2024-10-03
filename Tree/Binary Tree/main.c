@@ -62,6 +62,37 @@ void postOrder(struct Node *p){
     }
 }
 
+void insert(){
+    struct Node *temp , *newNode , *parent;
+    int value;
+    
+    printf("Enter the value to insert : ");
+    scanf("%d" , &value);
+    
+    newNode = createNode(value);
+    
+    if(root == NULL){
+        root = newNode;
+    }else{
+        temp = root;
+        while(temp!=NULL){
+            if(value > temp->data){
+                parent = temp;
+                temp = temp->rchild;
+            }else{
+                parent = temp;
+                temp = temp->lchild;
+            }
+        }
+        
+        if(value > parent->data){
+            parent->rchild = newNode;
+        }else{
+            parent->lchild = newNode;
+        }
+    }
+}
+
 
 int main()
 {
@@ -74,5 +105,9 @@ int main()
     inOrder(root);
     printf("\nPostOrder : ");
     postOrder(root);
+
+    printf("\n");
+    insert();
+    preOrder(root);
     return 0;
 }
