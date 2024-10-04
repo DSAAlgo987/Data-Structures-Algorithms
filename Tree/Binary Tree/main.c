@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "operations.h"
+#include "stack.h"
 
 struct Node *root = NULL;
 
@@ -62,6 +63,40 @@ void postOrder(struct Node *p){
     }
 }
 
+void IPreOder(struct Node *t) {
+    struct Stack st;
+    createStack(&st , 100);
+
+    // While there are nodes to process
+    while (t != NULL || !isStackEmpty(&st)) {
+        if (t != NULL) {
+            printf("%d ", t->data);  // Visit the node (Pre-order)
+            push(&st, t);  // Push the current node to the stack
+            t = t->lChild;  // Move to the left child
+        } else {
+            t = pop(&st);  // Pop the node from the stack
+            t = t->rChild;  // Move to the right child
+        }
+    }
+}
+
+
+void IInOrder(struct Node *t){
+    struct Stack st;
+    createStack(&st , 100);
+    
+    while(t != NULL || !isStackEmpty(&st)){
+        if(t){
+           push(&st , t);
+           t = t-> lChild;
+        }else{
+            t = pop(&st);
+            printf("%d" , t->data);
+            t = t->rChild;
+        }
+    }
+}
+
 void insert(){
     struct Node *temp , *newNode , *parent;
     int value;
@@ -93,21 +128,43 @@ void insert(){
     }
 }
 
+void IPostOrder(struct Node *t){
+     struct Stack st;
+    createStack(&st, 100); // Initialize stack with size 100
+    long int temp;
+    
+    while (t != NULL || !isStackEmpty(&st)) {
+        if (t != NULL) {
+            push(&st, (long int)t);  // Push node's address to the stack
+            t = t->lChild;  // Move to the left child
+        } else {
+            temp = pop(&st);  // Pop the top element from the stack
+            
+            if (temp > 0) {  // If it's a positive value (node address)
+                push(&st, -temp);  // Mark the node as processed by pushing a negative value
+                t = ((struct Node *)temp)->rChild;  // Move to the right child
+            } else {  // Negative value means the node has been processed
+                printf("%d ", ((struct Node *)(-temp))->data);  // Print the node's data
+                t = NULL;  // Set t to NULL to continue popping from the stack
+            }
+        }
+    }
+}
 
 int main()
 {
     createTree();
     
     printf("Tree Traversal : \n");
+    printf("\nIteretive preOrder : ");
+    IPreOder(root);
     printf("\nPreOrder : ");
     preOrder(root);
     printf("\nInOrder : ");
+    IInOrder(root);
     inOrder(root);
     printf("\nPostOrder : ");
+    IPostOrder(root);
     postOrder(root);
-
-    printf("\n");
-    insert();
-    preOrder(root);
     return 0;
 }

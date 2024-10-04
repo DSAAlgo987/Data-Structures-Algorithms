@@ -48,8 +48,8 @@ void push(struct Stack *st ,int value){
 }
 
 // Time complexity : O(1)
-void pop(struct Stack *st ){
-    int value;
+int pop(struct Stack *st ){
+    int value = -1;
     if(!isEmpty(st)){
         value = st->s[st->top];
         st->top--;
@@ -57,6 +57,7 @@ void pop(struct Stack *st ){
     }else{
         printf("\nStack is empty!");
     }
+    return value;
 }
 
 // knowing the value by position
