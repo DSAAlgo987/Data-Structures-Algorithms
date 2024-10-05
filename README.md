@@ -55,8 +55,19 @@ To run the C programs:
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Contributors
-- [Faisal786111](https://github.com/Faisal786111)
-- [Haruu4304](https://github.com/Haruu4304) (Harsha Surwase)
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Faisal786111" style="color: black; text-decoration: none;"><img src="https://avatars.githubusercontent.com/u/135214899?v=4?s=100" width="100px;" alt="Faisal786111"/><br /><sub><b>Faisal786111</b><br />(Faisal Khan)</sub></a><br /><a href="#code-Faisal786111" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Haruu4304" style="color: black; text-decoration: none;"><img src="https://cdn-icons-png.flaticon.com/512/206/206864.png" width="100px;" alt="Haruu4304"/><br /><sub><b>Haruu4304</b><br />(Harsha Surwase)</sub></a><br /><a href="#design-Haruu4304" title="Design">🎨</a> <a href="#code-Haruu4304" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 MIT License
