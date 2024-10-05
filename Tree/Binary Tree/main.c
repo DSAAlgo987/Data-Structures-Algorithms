@@ -151,20 +151,85 @@ void IPostOrder(struct Node *t){
     }
 }
 
+
+void LevelOrder(struct Node *p){
+    struct Queue q;
+    createQ(&q , 100);
+
+    printf("%d " , p->data);
+    enqueue(&q , p);
+
+    while(!isEmpty(&q)){
+        p = dequeue(&q);
+        if(p->lChild){
+            printf("%d " , p->lChild->data);
+            enqueue(&q , p->lChild);
+        }
+        if(p->rChild){
+            printf("%d " , p->rChild->data);
+            enqueue(&q , p->rChild);
+        }
+    }    
+}
+
+
 int main()
 {
-    createTree();
-    
-    printf("Tree Traversal : \n");
-    printf("\nIteretive preOrder : ");
-    IPreOder(root);
-    printf("\nPreOrder : ");
-    preOrder(root);
-    printf("\nInOrder : ");
-    IInOrder(root);
-    inOrder(root);
-    printf("\nPostOrder : ");
-    IPostOrder(root);
-    postOrder(root);
+    int choice;
+    while(1){
+        printf("\n========== Menu ==========\n");
+        printf("1. Create Binary Tree\n");
+        printf("2. Iterative PreOrder Traversal\n");
+        printf("3. Recursive PreOrder Traversal\n");
+        printf("4. Iterative InOrder Traversal\n");
+        printf("5. Recursive InOrder Traversal\n");
+        printf("6. Iterative PostOrder Traversal\n");
+        printf("7. Recursive PostOrder Traversal\n");
+        printf("8. Level Order Traversal\n");
+        printf("9. Exit\n");
+        printf("===========================\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                createTree();
+                break;
+            case 2:
+                printf("\nIterative PreOrder: ");
+                IPreOrder(root);
+                break;
+            case 3:
+                printf("\nRecursive PreOrder: ");
+                preOrder(root);
+                break;
+            case 4:
+                printf("\nIterative InOrder: ");
+                IInOrder(root);
+                break;
+            case 5:
+                printf("\nRecursive InOrder: ");
+                inOrder(root);
+                break;
+            case 6:
+                printf("\nIterative PostOrder: ");
+                IPostOrder(root);
+                break;
+            case 7:
+                printf("\nRecursive PostOrder: ");
+                postOrder(root);
+                break;
+            case 8:
+                printf("\nLevel Order Traversal: ");
+                LevelOrder(root);
+                break;
+            case 9:
+                printf("Exiting...\n");
+                return 0;
+            default:
+                printf("Invalid choice! Please select a valid option.\n");
+        }
+        
+    }
     return 0;
 }
