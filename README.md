@@ -54,6 +54,10 @@ To run the C programs:
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+### Important:
+Before merging any changes, make sure to **create a pull request** and have it reviewed by the repository maintainers. Only merge once all the reviews are completed and approved.
+
+
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
