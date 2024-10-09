@@ -44,6 +44,13 @@ Common operations performed on queues include:
 
 ## Implementations
 
+### Double Ended Queue
+
+
+###PENDING PENIND PENDING
+
+
+
 ### Array Implementation
 
 In an array-based implementation, a queue uses an array to store its elements. Two pointers, `front` and `rear`, are maintained to keep track of the beginning and end of the queue, respectively. Elements are added at the position indicated by `rear` and removed from the position indicated by `front`.
