@@ -7,7 +7,7 @@ function tree(n){
     }
 }
 
-tree(3);
+tree(5);
 
 // Tree recursion : When a recursive function is called more than one time this recursive function is called "Tree Recursion".
 
