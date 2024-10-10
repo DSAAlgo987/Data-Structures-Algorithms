@@ -186,7 +186,8 @@ int main()
         printf("6. Iterative PostOrder Traversal\n");
         printf("7. Recursive PostOrder Traversal\n");
         printf("8. Level Order Traversal\n");
-        printf("9. Exit\n");
+        printf("9. Count Nodes\n");
+        printf("10. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -224,6 +225,9 @@ int main()
                 LevelOrder(root);
                 break;
             case 9:
+                printf("\nCount Of Nodes: %d" , count(root));
+                break;
+            case 10:
                 printf("Exiting...\n");
                 return 0;
             default:

@@ -55,3 +55,10 @@ struct Node * dequeue(struct Queue *q){
 int isEmpty(struct Queue *q){
     return (q->front == q->rear) ? 1 : 0; 
 }
+
+int count(struct Node *p){
+    if(p){
+        return count(p->lChild) + count(p->rChild) + 1;
+    }
+    return 0;
+}
