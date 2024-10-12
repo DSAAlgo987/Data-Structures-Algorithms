@@ -68,6 +68,7 @@ Before merging any changes, make sure to **create a pull request** and have it r
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Faisal786111" style="color: black; text-decoration: none;"><img src="https://avatars.githubusercontent.com/u/135214899?v=4?s=100" width="100px;" alt="Faisal786111"/><br /><sub><b>Faisal786111</b><br />(Faisal Khan)</sub></a><br /><a href="#code-Faisal786111" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Haruu4304" style="color: black; text-decoration: none;"><img src="https://cdn-icons-png.flaticon.com/512/206/206864.png" width="100px;" alt="Haruu4304"/><br /><sub><b>Haruu4304</b><br />(Harsha Surwase)</sub></a><br /><a href="#design-Haruu4304" title="Design">🎨</a> <a href="#code-Haruu4304" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Haruu4304" style="color: black; text-decoration: none;"><img src="https://avatars.githubusercontent.com/u/135214899?v=4?s=100" width="100px;" alt="AkshitShah96"/><br /><sub><b>AkshitShah96</b><br />(Akshit Shah)</sub></a><br /><a href="#design-Haruu4304" title="Design">🎨</a> <a href="#code-AkshitShah96" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
