@@ -172,6 +172,43 @@ void LevelOrder(struct Node *p){
     }    
 }
 
+int countInternal(struct Node *p){
+    if(p){
+        if( p->lChild || p->rChild){
+            return countInternal(p->lChild) + countInternal(p->rChild) + 1;
+        }
+    }
+    return 0;
+}
+
+int height(struct Node *p){
+    int x , y;
+    if(p){
+        x = height(p->rChild);
+        y = height(p->lChild);
+        if(x > y){
+            return x + 1;
+        }else {
+            return y + 1;
+        }
+    }
+    return -1;
+}
+
+int level(struct Node *p){
+    int x , y;
+    if(p){
+        x = level(p->rChild);
+        y = level(p->lChild);
+        if(x > y){
+            return x + 1;
+        }else {
+            return y + 1;
+        }
+    }
+    return 0;
+}
+
 
 int main()
 {
@@ -187,7 +224,11 @@ int main()
         printf("7. Recursive PostOrder Traversal\n");
         printf("8. Level Order Traversal\n");
         printf("9. Count Nodes\n");
-        printf("10. Exit\n");
+        printf("10. Count of Internal Nodes\n");
+        printf("11. Count of External Nodes\n");
+        printf("12. Height\n");
+        printf("13. Level\n");
+        printf("14. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -228,6 +269,18 @@ int main()
                 printf("\nCount Of Nodes: %d" , count(root));
                 break;
             case 10:
+                printf("\nCount Of Internal Nodes: %d" , countInternal(root));
+                break;
+            case 11:
+                printf("\nCount Of External Nodes: %d" , count(root) - countInternal(root));
+                break;
+            case 12:
+                printf("\nHeight: %d" , height(root));
+                break;
+            case 13:
+                printf("\nLevel: %d" , level(root));
+                break;
+            case 14:
                 printf("Exiting...\n");
                 return 0;
             default:
