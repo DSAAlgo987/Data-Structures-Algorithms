@@ -63,7 +63,7 @@ void postOrder(struct Node *p){
     }
 }
 
-void IPreOder(struct Node *t) {
+void IPreOrder(struct Node *t) {
     struct Stack st;
     createStack(&st , 100);
 
@@ -113,17 +113,17 @@ void insert(){
         while(temp!=NULL){
             if(value > temp->data){
                 parent = temp;
-                temp = temp->rchild;
+                temp = temp->rChild;
             }else{
                 parent = temp;
-                temp = temp->lchild;
+                temp = temp->lChild;
             }
         }
         
         if(value > parent->data){
-            parent->rchild = newNode;
+            parent->rChild = newNode;
         }else{
-            parent->lchild = newNode;
+            parent->lChild = newNode;
         }
     }
 }
@@ -172,10 +172,49 @@ void LevelOrder(struct Node *p){
     }    
 }
 
+// count nodes having degree(2)
+int countNodesDegreeTwo(struct Node *p){
+    if(p){
+        if(p->lChild && p->rChild){
+            return countNodesDegreeTwo(p->lChild) + countNodesDegreeTwo(p->rChild) + 1;
+        }else{
+            return countNodesDegreeTwo(p->lChild) + countNodesDegreeTwo(p->rChild);
+        }
+    }
+    return 0;
+}
+
+// count nodes having degree (1,2)
 int countInternal(struct Node *p){
     if(p){
         if( p->lChild || p->rChild){
             return countInternal(p->lChild) + countInternal(p->rChild) + 1;
+        }else{
+            return countInternal(p->lChild) + countInternal(p->rChild);
+        }
+    }
+    return 0;
+}
+
+// count nodes having degree 1 
+int countDegreeOne(struct Node *p){
+    if(p){
+        if(p->lChild != NULL ^ p->rChild != NULL){
+            return countDegreeOne(p->lChild) + countDegreeOne(p->rChild) + 1;
+        }else{
+            return countDegreeOne(p->lChild) + countDegreeOne(p->rChild);
+        }
+    }
+    return 0;
+}
+
+// count of external nodes 
+int countExternal(struct Node *p){
+    if(p){
+        if(!p->rChild && !p->lChild){
+            return 1;
+        }else{
+            return countExternal(p->lChild) + countExternal(p->rChild);
         }
     }
     return 0;
@@ -213,80 +252,104 @@ int level(struct Node *p){
 int main()
 {
     int choice;
-    while(1){
-        printf("\n========== Menu ==========\n");
-        printf("1. Create Binary Tree\n");
-        printf("2. Iterative PreOrder Traversal\n");
-        printf("3. Recursive PreOrder Traversal\n");
-        printf("4. Iterative InOrder Traversal\n");
-        printf("5. Recursive InOrder Traversal\n");
-        printf("6. Iterative PostOrder Traversal\n");
-        printf("7. Recursive PostOrder Traversal\n");
-        printf("8. Level Order Traversal\n");
-        printf("9. Count Nodes\n");
-        printf("10. Count of Internal Nodes\n");
-        printf("11. Count of External Nodes\n");
-        printf("12. Height\n");
-        printf("13. Level\n");
-        printf("14. Exit\n");
-        printf("===========================\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-        
-        switch (choice) {
-            case 1:
-                createTree();
-                break;
-            case 2:
-                printf("\nIterative PreOrder: ");
-                IPreOrder(root);
-                break;
-            case 3:
-                printf("\nRecursive PreOrder: ");
-                preOrder(root);
-                break;
-            case 4:
-                printf("\nIterative InOrder: ");
-                IInOrder(root);
-                break;
-            case 5:
-                printf("\nRecursive InOrder: ");
-                inOrder(root);
-                break;
-            case 6:
-                printf("\nIterative PostOrder: ");
-                IPostOrder(root);
-                break;
-            case 7:
-                printf("\nRecursive PostOrder: ");
-                postOrder(root);
-                break;
-            case 8:
-                printf("\nLevel Order Traversal: ");
-                LevelOrder(root);
-                break;
-            case 9:
-                printf("\nCount Of Nodes: %d" , count(root));
-                break;
-            case 10:
-                printf("\nCount Of Internal Nodes: %d" , countInternal(root));
-                break;
-            case 11:
-                printf("\nCount Of External Nodes: %d" , count(root) - countInternal(root));
-                break;
-            case 12:
-                printf("\nHeight: %d" , height(root));
-                break;
-            case 13:
-                printf("\nLevel: %d" , level(root));
-                break;
-            case 14:
-                printf("Exiting...\n");
-                return 0;
-            default:
-                printf("Invalid choice! Please select a valid option.\n");
-        }
-        
+    while (1) {
+    printf("\n========== Menu ==========\n");
+    printf("1. Create Binary Tree\n");
+    printf("2. Iterative PreOrder Traversal\n");
+    printf("3. Recursive PreOrder Traversal\n");
+    printf("4. Iterative InOrder Traversal\n");
+    printf("5. Recursive InOrder Traversal\n");
+    printf("6. Iterative PostOrder Traversal\n");
+    printf("7. Recursive PostOrder Traversal\n");
+    printf("8. Level Order Traversal\n");
+    printf("9. Count Nodes\n");
+    printf("10. Count of External Nodes\n");
+    printf("11. Count of Nodes Having Degree 2\n");
+    printf("12. Count of Nodes Having Degree 1 or 2\n");
+    printf("13. Count of Nodes Having Degree 1\n");
+    printf("14. Height of the Tree\n");
+    printf("15. Level of the Tree\n");
+    printf("16. Exit\n");
+    printf("===========================\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            createTree();
+            break;
+
+        case 2:
+            printf("\nIterative PreOrder: ");
+            IPreOrder(root);
+            break;
+
+        case 3:
+            printf("\nRecursive PreOrder: ");
+            preOrder(root);
+            break;
+
+        case 4:
+            printf("\nIterative InOrder: ");
+            IInOrder(root);
+            break;
+
+        case 5:
+            printf("\nRecursive InOrder: ");
+            inOrder(root);
+            break;
+
+        case 6:
+            printf("\nIterative PostOrder: ");
+            IPostOrder(root);
+            break;
+
+        case 7:
+            printf("\nRecursive PostOrder: ");
+            postOrder(root);
+            break;
+
+        case 8:
+            printf("\nLevel Order Traversal: ");
+            LevelOrder(root);
+            break;
+
+        case 9:
+            printf("\nCount of Nodes: %d", count(root));
+            break;
+
+        case 10:
+            printf("\nCount of External Nodes (Leaf Nodes): %d", countExternal(root));
+            break;
+
+        case 11:
+            printf("\nCount of Nodes Having Degree 2 (Two Children): %d", countNodesDegreeTwo(root));
+            break;
+
+        case 12:
+            printf("\nCount of Nodes Having Degree 1 or 2: %d", countInternal(root));
+            break;
+
+        case 13:
+            printf("\nCount of Nodes Having Degree 1 (One Child): %d", countDegreeOne(root));
+            break;
+
+        case 14:
+            printf("\nHeight of the Tree: %d", height(root));
+            break;
+
+        case 15:
+            printf("\nLevel of the Tree (root level): %d", level(root));
+            break;
+
+        case 16:
+            printf("Exiting...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice! Please select a valid option.\n");
     }
+}
+
     return 0;
 }
