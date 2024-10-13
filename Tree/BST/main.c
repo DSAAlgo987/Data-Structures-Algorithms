@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "stack.h"
 
 struct Node {
     int data;
@@ -177,9 +178,41 @@ struct Node *delete(struct Node *p , int key){
     return p;
 }
 
+// Generate BST from PreOrder
+// TC : O(n)
+void createFromPre(int A[] , int n){
+    struct Node *t , *p;
+    struct Stack st;
+    createStack(&st , 100);
+    int i = 0;
+
+    // Initial step
+    root = createNode(A[i++]);
+    p = root;
+
+    // Repeatingn steps
+    while(i < n){
+        // left child case
+        if(A[i] < p->data){
+            t = createNode(A[i++]);
+            p->lChild = t;
+            push(&st , p);
+            p = t;
+        }// right child case 
+        else if(A[i] > p->data && A[i] < (isStackEmpty(&st) ? 32767 : stackTop(&st)->data)){
+            t = createNode(A[i++]);
+            p->rChild = t;
+            p = t;
+        }else{
+            p = pop(&st);
+        }
+    }
+}
+
 int main(){
     int choice , key;
     struct Node *temp;
+    int A[] = {30, 20, 10, 15, 25, 40, 50, 45};
     while(1){
         printf("\n========== Menu ==========\n");
         printf("1. Iterative Insert: \n");
@@ -193,7 +226,8 @@ int main(){
         printf("9. Inorder Predecessor\n");
         printf("10. Inorder Successor\n");
         printf("11. Recursive Delete\n");
-        printf("12. Exit\n");
+        printf("12. Generate Tree From PreOrder\n");
+        printf("13. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -259,6 +293,10 @@ int main(){
             delete(root , key);
             break;
         case 12:
+            createFromPre(A , 8);
+            printf("\nTree Created...");
+            break;
+        case 13:
             printf("\nExiting...");
             return 0;
         
