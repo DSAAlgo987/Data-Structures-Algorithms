@@ -113,6 +113,70 @@ struct Node *RS(struct Node *t , int key){
     }
 }
 
+int height(struct Node *p){
+    int x , y;
+    if(p){
+        x = height(p->lChild);
+        y = height(p->rChild);
+        if(x >y){
+            return x + 1;
+        }else{
+            return y + 1;
+        }
+    }
+    return -1;
+}
+
+struct Node * inPre(struct Node *p){
+    while(p && p->rChild != NULL){
+        p = p->rChild;
+    }
+    
+    return p;
+}
+
+struct Node * inSucc(struct Node *p){
+    while(p && p->lChild != NULL){
+        p = p->lChild;
+    }
+    
+    return p;
+}
+
+struct Node *delete(struct Node *p , int key){
+    struct Node *q;
+    
+    if(p == NULL){
+        return NULL;
+    }
+    
+    if(p->lChild == NULL && p->rChild== NULL){
+        if(p == root){
+            root = NULL;
+        }
+        free(p);
+        return NULL;
+    }
+    
+    if(key <  p->data){
+        p->lChild = delete(p->lChild , key);
+    }else if(key > p->data){
+        p->rChild = delete(p->rChild , key);
+    }else{
+        if(height(p->lChild) > height(p->rChild)){
+            q = inPre(p->lChild);
+            p->data = q->data;
+            p->lChild = delete(p->lChild , q->data);
+        }else{
+            q = inSucc(p->rChild);
+            p->data = q->data;
+            p->rChild =delete(p->rChild , q->data);
+        }
+    }
+    
+    return p;
+}
+
 int main(){
     int choice , key;
     struct Node *temp;
@@ -125,7 +189,11 @@ int main(){
         printf("5. Recursive PostOrder Traversal\n");
         printf("6. Iterative Search\n");
         printf("7. Recursive Search\n");
-        printf("8. Exit\n");
+        printf("8. Height\n");
+        printf("9. Inorder Predecessor\n");
+        printf("10. Inorder Successor\n");
+        printf("11. Recursive Delete\n");
+        printf("12. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -140,7 +208,7 @@ int main(){
         case 2:
             printf("\nEnter the value to insert : ");
             scanf("%d" , &key);
-            root = insert(key);
+            root = RInsert(root , key);
             break;
         case 3:
             printf("\nRecursive PreOrder : ");
@@ -153,7 +221,6 @@ int main(){
         case 5:
             printf("\nRecursive PostOrder : ");
             postOrder(root);
-            root = insert(key);
             break;
         case 6:
             printf("Enter the value to search : ");
@@ -175,6 +242,25 @@ int main(){
                 printf("\n %d Elemetn is not present." , key);
             }
             break;
+        case 8:
+            printf("\nHeight : %d" , height(root));
+            break;
+        case 9:
+            temp = inPre(root->lChild);
+            printf("\nInorder Predecessor : %d" , temp->data);
+            break;
+        case 10:
+            temp = inSucc(root->rChild);
+            printf("\nInorderr Successor : %d" , temp->data);
+            break;
+        case 11:
+            printf("\nEnter the value to delete : ");
+            scanf("%d", &key);
+            delete(root , key);
+            break;
+        case 12:
+            printf("\nExiting...");
+            return 0;
         
         default:
             break;
