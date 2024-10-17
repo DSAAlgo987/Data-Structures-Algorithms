@@ -178,6 +178,64 @@ struct Node *delete(struct Node *p , int key){
     return p;
 }
 
+// Delete Iterative 
+void deleteI(int key){
+    struct Node *p  = root; 
+    struct Node *parent,*pred;
+    while(p && p->data != key){
+        parent = p;
+        if(key < p->data){
+            p = p->lChild;
+        }else{
+            p = p->rChild;
+        }
+    }
+
+    // case 1 : Value not foud.
+    if(p == NULL){
+        printf("Value Not Found.");
+    }// case 2 : Leaf node
+    else if(!p->lChild && !p->rChild){
+        if(p == parent->rChild){ // if it is a right child
+            parent->rChild = NULL;
+            free(p);
+        }else{ // other wise left child
+            parent->lChild = NULL;
+            free(p);
+        }
+    }// case 3(i) : if p's left child present
+    else if(p->lChild && !p->rChild){ 
+        if(p == parent->lChild){
+            parent->lChild = p->lChild;
+        }else{
+            parent->rChild = p->lChild;
+        }
+        free(p);
+    }// case 3(ii) : if p's right child present
+    else if(!p->lChild && p->rChild){
+        if(p == parent->lChild){
+            parent->lChild = p->rChild;
+        }else{
+            parent->rChild = p->rChild;
+        }
+        free(p);
+    }// case 4 : if p has 2 children
+    else {
+        parent = p;
+        pred = p->lChild;
+
+        // identify inoder predecessor 
+        while(pred->rChild){
+            parent = pred;
+            pred = pred->rChild;
+        }
+
+        p->data = pred->data;
+        parent->rChild = pred->lChild;
+        free(pred);
+    }
+}
+
 // Generate BST from PreOrder
 // TC : O(n)
 void createFromPre(int A[] , int n){
@@ -212,7 +270,7 @@ void createFromPre(int A[] , int n){
 int main(){
     int choice , key;
     struct Node *temp;
-    int A[] = {30, 20, 10, 15, 25, 40, 50, 45};
+    int A[] = {100 , 50 , 25 , 10 , 35 , 30 , 75 , 65 , 60 , 90 , 80 , 150 , 125 , 110 , 115 , 135 , 130 , 175 , 165 , 160 , 190 , 180};
     while(1){
         printf("\n========== Menu ==========\n");
         printf("1. Iterative Insert: \n");
@@ -227,7 +285,8 @@ int main(){
         printf("10. Inorder Successor\n");
         printf("11. Recursive Delete\n");
         printf("12. Generate Tree From PreOrder\n");
-        printf("13. Exit\n");
+        printf("13. Delete Iterative\n");
+        printf("14. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -293,10 +352,15 @@ int main(){
             delete(root , key);
             break;
         case 12:
-            createFromPre(A , 8);
+            createFromPre(A , 22);
             printf("\nTree Created...");
             break;
         case 13:
+            printf("\nEnter the value to delete :");
+            scanf("%d" , &key);
+            deleteI(key);
+            break;
+        case 14:
             printf("\nExiting...");
             return 0;
         
