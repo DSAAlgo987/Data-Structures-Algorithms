@@ -156,6 +156,76 @@ struct Node *rInsert(struct Node *p , int key){
     return p;
 }
 
+struct Node * inPre(struct Node *p){
+    while(p && p->rChild != NULL){
+        p = p->rChild;
+    }
+    
+    return p;
+}
+
+struct Node * inSucc(struct Node *p){
+    while(p && p->lChild != NULL){
+        p = p->lChild;
+    }
+    
+    return p;
+}
+
+struct Node *delete(struct Node *p , int key){
+    struct Node *q;
+    
+    if(p == NULL){
+        return NULL;
+    }
+    
+    if(p->lChild == NULL && p->rChild== NULL){
+        if(p == root){
+            root = NULL;
+        }
+        free(p);
+        return NULL;
+    }
+    
+    if(key <  p->data){
+        p->lChild = delete(p->lChild , key);
+    }else if(key > p->data){
+        p->rChild = delete(p->rChild , key);
+    }else{
+        if(nodeHeight(p->lChild) > nodeHeight(p->rChild)){
+            q = inPre(p->lChild);
+            p->data = q->data;
+            p->lChild = delete(p->lChild , q->data);
+        }else{
+            q = inSucc(p->rChild);
+            p->data = q->data;
+            p->rChild =delete(p->rChild , q->data);
+        }
+    }
+
+    // update height of each node
+    p->height = nodeHeight(p);
+
+    // identify which rotations have to perform after deletion of a node 
+    if(balanceFactor(p) == 2 && balanceFactor(p->lChild) == 1)// L1 Rotation
+    {
+        return LLRotation(p);
+    }else if(balanceFactor(p) == 2 && balanceFactor(p->lChild) == -1){ // L-1 Rotation
+        return LRRotation(p);
+    }else if(balanceFactor(p) == 2 && balanceFactor(p->rChild) == 0){ // L1 or L-1 Roations (both we can perform)
+        return LLRotation(p);
+    }else if(balanceFactor(p) == -2 && balanceFactor(p->rChild) == -1){// R-1 Rotation
+        return RRRotation(p);
+    }else if(balanceFactor(p) == -2 && balanceFactor(p->rChild) == 1){// R1 Rotation
+        return RLRotation(p);
+    }else if(balanceFactor(p) == -2 && balanceFactor(p->rChild) == 0){// R-1 & R1 Roation (both we can perform)
+        return RRRotation(p);
+    }
+
+    return p;
+}
+
+
 // inorder(left) , visit(node) , inorder(right)
 void inOrder(struct Node *p){
     if(p){
@@ -172,8 +242,9 @@ int main(){
     while(1) {
         printf("\n========== AVL Tree Menu ==========\n");
         printf("1. Insert Node\n");
-        printf("2. In-Order Traversal\n");
-        printf("3. Exit\n");
+        printf("2. Delete Node\n");
+        printf("3. In-Order Traversal\n");
+        printf("4. Exit\n");
         printf("====================================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -185,10 +256,15 @@ int main(){
                 root = rInsert(root, key);
                 break;
             case 2:
+                printf("\nEnter the key to delete: ");
+                scanf("%d", &key);
+                root = delete(root, key);
+                break;
+            case 3:
                 printf("\nIn-Order Traversal: ");
                 inOrder(root);
                 break;
-            case 3:
+            case 4:
                 printf("Exiting...\n");
                 return 0;
             default:
