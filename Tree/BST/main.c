@@ -267,6 +267,7 @@ void createFromPre(int A[] , int n){
     }
 }
 
+// TC : O(n) , SC : O(h)
 struct Node *mirror(struct TreeNode* root) {
     if(root == NULL){
         return NULL;
