@@ -267,6 +267,20 @@ void createFromPre(int A[] , int n){
     }
 }
 
+struct Node *mirror(struct TreeNode* root) {
+    if(root == NULL){
+        return NULL;
+    }
+
+    struct TreeNode *left = mirror(root->left);
+    struct TreeNode *right = mirror(root->right);
+
+    root->left = right;
+    root->right = left;
+
+    return root;
+}
+
 int main(){
     int choice , key;
     struct Node *temp;
@@ -286,7 +300,8 @@ int main(){
         printf("11. Recursive Delete\n");
         printf("12. Generate Tree From PreOrder\n");
         printf("13. Delete Iterative\n");
-        printf("14. Exit\n");
+        printf("14. Mirror of a tree\n");
+        printf("15. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -361,6 +376,10 @@ int main(){
             deleteI(key);
             break;
         case 14:
+            root = mirror(root);
+            printf("\nMirror is created..");
+            break;
+        case 15:
             printf("\nExiting...");
             return 0;
         
