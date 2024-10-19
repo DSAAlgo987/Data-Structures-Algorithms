@@ -29,9 +29,15 @@ This repository contains implementations of various data structures and algorith
   - Evaluation of Postfix & Prefix
 - [Queue](./Queue)
   - Priority Queue using Linked List
-  - Queue using array
+  - Queue using Array
   - Queue using Linked List
   - Queue using Two Stacks
+- [Tree](./Tree)
+  - [Binary Tree](./Tree/Binary%20Tree)
+  - [Binary Search Tree (BST)](./Tree/BST)
+  - [AVL Tree](./Tree/AVL)
+- [Hashing](./Hash/Chaining)
+  - Hashing with Chaining
 
 ## Algorithms
 
