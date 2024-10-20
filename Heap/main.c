@@ -22,7 +22,7 @@ void swap(int *a , int *b){
     *b = temp;
 }
 
-// TC : O(nlogn)
+// TC : O(logn)
 int delete(int A[] , int n){
     int x, i , j , temp;
     x = A[1];
