@@ -32,12 +32,19 @@ Heaps are best suited for implementing **priority queues**.
 
 ---
 
-## Heap Operations
+## Heap Operations and Time Complexity
 
-1. **Creation**: Build a heap by rearranging elements in an array to satisfy the heap properties.
-2. **Insertion**: Add a new element into the heap and ensure that the heap property is maintained.
-3. **Deletion**: Remove the root (either the minimum or maximum, depending on heap type) and reheapify the structure.
-4. **Heapify**: Rearrange the elements to maintain the heap structure after insertion or deletion.
+1. **Creation**: Build a heap by rearranging elements in an array to satisfy the heap properties.  
+   **Time Complexity**: O(n log n)
+
+2. **Insertion**: Add a new element into the heap and ensure that the heap property is maintained.  
+   **Time Complexity**: O(log n)
+
+3. **Deletion**: Remove the root (either the minimum or maximum, depending on heap type) and reheapify the structure.  
+   **Time Complexity**: O(log n)
+
+4. **Heapify**: Adjusting an entire array into a heap structure.  
+   **Time Complexity**: O(n)
 
 ---
 
