@@ -16,6 +16,11 @@ void insert(int A[] , int n){
     A[i] = temp;
 }
 
+void swap(int *a , int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 // TC : O(nlogn)
 int delete(int A[] , int n){
@@ -47,15 +52,39 @@ int delete(int A[] , int n){
     return x;
 }
 
+// TC : O(n) faster than normal creation 
+void heapify(int A[] , int n){
+    for(int i = n/2 ; i>0 ; i--){
+        int j = 2 *i;
+        int dummy = i;
+
+        while(j < n){// this condition ensures that node must have both lchild & rchild to go inside loop.
+            // comparing children 
+            if(A[j+1] > A[j]){
+                j = j+1;
+            }
+            // comapring parent with children
+            if(A[i] < A[j]){
+                swap(&A[i] , &A[j]);
+                i = j;
+                j = 2 *j;
+            }
+        }
+        // i is at the leaf right now, so reassigned to its original value
+        i = dummy;
+    }
+}
 
 int main(){
     int H[] = {0 , 10 , 20 , 30 , 25, 5 , 40 , 35};
     // 40 , 25 , 35 , 10 , 5 , 20, 30
 
-    // TC : O(nlogn)
+    TC : O(nlogn)
     for(int i = 2 ; i<=7 ; i++){
         insert(H ,i);
     }
+
+    heapify(H , 7);
 
     printf("\nHeap : ");
     for(int i = 1 ; i<=7 ; i++){
