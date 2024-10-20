@@ -36,6 +36,10 @@ This repository contains implementations of various data structures and algorith
   - [Binary Tree](./Tree/Binary%20Tree)
   - [Binary Search Tree (BST)](./Tree/BST)
   - [AVL Tree](./Tree/AVL)
+- [Heap](./Heap)
+  - Min Heap
+  - Max Heap
+  - Heap Operations (Insert, Delete, Heapify)
 - [Hashing](./Hash/Chaining)
   - Hashing with Chaining
 
