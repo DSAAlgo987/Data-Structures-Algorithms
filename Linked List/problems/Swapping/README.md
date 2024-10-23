@@ -2,6 +2,11 @@
 
 This project demonstrates how to swap two variables using the XOR bitwise operation in **C**, without using a third variable. The XOR technique allows us to swap values efficiently without the need for extra memory.
 
+<div align="center">
+    <img src="./swapping%20image.PNG" alt="Swapping Image" />
+</div>
+
+
 ## How XOR Works
 
 The XOR (Exclusive OR) operation is a bitwise operator that compares two bits:
