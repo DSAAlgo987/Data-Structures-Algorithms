@@ -6,7 +6,8 @@
         "operations.h": "c",
         "stdlib.h": "c",
         "tree.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "random": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
