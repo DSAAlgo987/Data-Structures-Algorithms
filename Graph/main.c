@@ -29,13 +29,17 @@ void BFS(int i){
 }
 
 void DFS(int v){
-    for(int i=1; i<=n ;i++){
-        if(adj[v][i] == 1 && visited[i] == 0){
-            printf("%d ",i);
-            visited[i] = 1;
-            DFS(i);
-        }   
-    } 
+   if(visited[v] == 0){
+        printf("%d ",v);
+        visited[v] =1;
+        // explore all it's adjacents
+        for(int i = 1; i<=n ; i++){
+            // if connection and not visited then enter 
+            if(adj[v][i]== 1 && visited[i] == 0){
+                DFS(i);
+            }
+        }
+   }
 }
 
 int main(){
@@ -66,8 +70,6 @@ int main(){
     
     printf("Enter the starting vertex : ");
     scanf("%d" , &v);
-    printf("%d ",v);
-    visited[v] = 1;
     DFS(v);
 
     
