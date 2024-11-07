@@ -322,6 +322,22 @@ int depthNode(struct Node *root , int value , int depth){
     return depthNode(root->rChild , value ,depth+1);
 }
 
+struct Node *copyTree(struct Node *root){
+    if(root == NULL){
+        return NULL;
+    }
+
+    // create a newnode as root with same data
+    struct Node *newNode = createNode(root->data);
+
+    // recursively copy left and right children
+    newNode->lChild = copyTree(root->lChild);
+    newNode->rChild = copyTree(root->rChild);
+
+    // return copied tree
+    return newNode;
+}
+
 int main(){
     int choice , key;
     struct Node *temp;
@@ -345,7 +361,8 @@ int main(){
         printf("15. Mirror of a tree\n");
         printf("16. Mirror of a tree\n");
         printf("17. Depth of a node\n");
-        printf("18. Exit\n");
+        printf("18. Copy Tree\n");
+        printf("19. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -436,6 +453,11 @@ int main(){
            printf("\n Depth of a node's Element %d : %d",value , depthNode(root, value , 0));
             break;
         case 18:
+            struct Node *copiedTree = copyTree(root);
+            printf("Copy Tree inorder traversal : ");
+            inOrder(copiedTree);
+            break;
+        case 19:
             printf("\nExiting...");
             return 0;
         
