@@ -282,6 +282,46 @@ struct Node *mirror(struct TreeNode* root) {
     return root;
 }
 
+// find min value 
+int minValue(struct Node *p){
+    if(p->lChild){
+        return minValue(p->lChild);
+    }else {
+        return p->data;
+    }
+}
+
+// find max value 
+int maxVaue(struct Node *p){
+    if(p->rChild){
+        return maxVaue(p->rChild);
+    }else {
+        return p->data;
+    }
+}
+
+// find depth of a node 
+int depthNode(struct Node *root , int value , int depth){
+    // if node is empty
+    if(root == NULL){
+        return -1;
+    }
+    
+    // if the node's data match with given value 
+    if(root->data == value){
+        return depth;
+    }
+    
+    int leftDepth = depthNode(root->lChild , value , depth+1);
+    // if value is identified in the left subtree
+    if(leftDepth != -1){
+        return leftDepth;
+    }
+    
+    // search value in right subtree
+    return depthNode(root->rChild , value ,depth+1);
+}
+
 int main(){
     int choice , key;
     struct Node *temp;
@@ -302,7 +342,10 @@ int main(){
         printf("12. Generate Tree From PreOrder\n");
         printf("13. Delete Iterative\n");
         printf("14. Mirror of a tree\n");
-        printf("15. Exit\n");
+        printf("15. Mirror of a tree\n");
+        printf("16. Mirror of a tree\n");
+        printf("17. Depth of a node\n");
+        printf("18. Exit\n");
         printf("===========================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -381,6 +424,18 @@ int main(){
             printf("\nMirror is created..");
             break;
         case 15:
+            printf("\nMin Value : %d", minValue(root));
+            break;
+        case 16:
+           printf("\nMax Value : %d", maxVaue(root));
+            break;
+        case 17:
+           int value;
+           printf("Enter the Node element to find depth : ");
+           scanf("%d" , &value);
+           printf("\n Depth of a node's Element %d : %d",value , depthNode(root, value , 0));
+            break;
+        case 18:
             printf("\nExiting...");
             return 0;
         
