@@ -358,8 +358,8 @@ int main(){
         printf("12. Generate Tree From PreOrder\n");
         printf("13. Delete Iterative\n");
         printf("14. Mirror of a tree\n");
-        printf("15. Mirror of a tree\n");
-        printf("16. Mirror of a tree\n");
+        printf("15. Min value\n");
+        printf("16. Max value\n");
         printf("17. Depth of a node\n");
         printf("18. Copy Tree\n");
         printf("19. Exit\n");
