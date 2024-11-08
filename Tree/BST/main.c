@@ -268,13 +268,13 @@ void createFromPre(int A[] , int n){
 }
 
 // TC : O(n) , SC : O(h)
-struct Node *mirror(struct TreeNode* root) {
+struct Node *mirror(struct Node* root) {
     if(root == NULL){
         return NULL;
     }
 
-    struct TreeNode *left = mirror(root->left);
-    struct TreeNode *right = mirror(root->right);
+    struct Node *left = mirror(root->left);
+    struct Node *right = mirror(root->right);
 
     root->left = right;
     root->right = left;
