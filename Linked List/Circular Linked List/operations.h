@@ -86,7 +86,7 @@ void insertAfter(){
 
     newNode = createNode(15);
 
-    start = temp;
+    temp = start;
     while(temp->data != x){
         temp=temp->next;
     }   
@@ -133,4 +133,92 @@ void traverse(){
         printf("Element : %d\n" , temp->data);
         temp = temp->next;
     }while(temp != start);
+}
+
+void insertBeforePos(){
+    int x, value;
+    struct Node *newNode , *temp , *prev;
+    
+    printf("Enter the position before which you want to insert : ");
+    scanf("%d" , &x);
+    
+    printf("Enter the value to insert : ");
+    scanf("%d" , &value);
+    
+    newNode = createNode(value);
+    
+    temp = start;
+    for(int i = 1 ; i<x && temp->next !=start; i++){
+        prev = temp;
+        temp = temp->next;
+    }
+    
+    if(temp == start){ // before first node 
+        struct Node *last = temp;
+        while(last->next != start){
+            last = last->next;
+        }
+        last->next = newNode;
+        newNode->next = start;
+        start = newNode;
+    }else { // before middle and last node 
+        prev->next =newNode;
+        newNode->next = temp;
+    }
+}
+
+void insertAfterPos(){
+    int x , value;
+    struct Node *newNode , *temp;
+    
+    printf("Enter the position after which you want to insert : ");
+    scanf("%d" , &x);
+    
+    printf("Enter the value to insert : ");
+    scanf("%d", &value);
+    
+    newNode = createNode(value);
+    
+    temp = start;
+    
+    for(int i = 1 ; i < x  && temp->next != start ; i++){
+        temp = temp->next;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void deletePos(){
+    int x;
+    struct Node *temp = start, *prev= NULL;
+    
+    printf("Enter the node's position to delete : ");
+    scanf("%d" , &x);
+    
+    // for 1st node 
+    if(x == 1){
+        struct Node *last = start;
+        while(last->next !=  start){
+            last = last->next;
+        }
+        
+        last->next = start->next;
+        start = start->next; 
+        free(temp);
+        return;
+    }
+    
+    // for other nodes 
+    for(int i = 1 ; i<x; i++){
+        prev = temp;
+        temp = temp->next;
+        if(temp == start){ // if it is loopback to stack 
+            printf("Index out of bound.");
+            return; // we should exit from this so deletion will not happend
+        }
+    }
+    
+    // delete between and last node 
+    prev->next = temp->next;
+    free(temp);
 }
