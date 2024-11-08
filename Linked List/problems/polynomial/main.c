@@ -8,6 +8,7 @@ int main()
     add();    
     displayPolynomial(result);
     
+    result = NULL;
     subtract();
     displayPolynomial(result);
 

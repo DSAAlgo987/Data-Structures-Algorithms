@@ -113,39 +113,40 @@ void add(){
 
 
 void subtract(){
-    struct Node *temp1 = start1 , *temp2 = start2;
+    struct Node *temp1 = start1 , *temp2 =start2;
     int c , p;
     
-    while(temp1 !=NULL && temp2!=NULL){
-        if(temp1->pow == temp2->pow){
-            c = temp1->coeff - temp2->coeff;
-            p = temp1->pow;
+    while(temp1!=NULL && temp2!=NULL){
+        if(temp1->power == temp2->power){
+            c = temp1->coef - temp2->coef;
+            p = temp1->power;
             temp1= temp1->next;
             temp2= temp2->next;
             createResult(c , p);
-        }else if(temp1->pow > temp2->pow){
-            c = temp1->coeff;
-            p = temp1->pow;
+        }else if(temp1->power > temp2->power){
+            c = temp1->coef;
+            p = temp1->power;
             temp1 = temp1->next;
             createResult(c , p);
-        }else{
-             c = temp2->coeff;
-            p = temp2->pow;
+        }else {
+            c = -temp2->coef;// Negating the coefficient of the second polynomia
+            p = temp2->power;
             temp2 = temp2->next;
             createResult(c , p);
         }
     }
     
-    while(temp1 !=NULL){
-        c = temp1->coeff;
-        p = temp1->pow;
+    // add remaining nodes in temp1
+    while(temp1!=NULL){
+        c = temp1->coef;
+        p = temp1->power;
         temp1 = temp1->next;
         createResult(c , p);
     }
     
-    while(temp2 !=NULL){
-        c = temp2->coeff;
-        p = temp2->pow;
+    while(temp2!= NULL){
+        c = -temp2->coef; // Negating the coefficient of the second polynomial
+        p = temp2->power;
         temp2 = temp2->next;
         createResult(c , p);
     }
