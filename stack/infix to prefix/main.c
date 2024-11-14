@@ -15,6 +15,7 @@ int main(){
     //     printf("\nNot palindrome");
     // }
 
+
     // using two pointer approach
     if(palindrome2(str)){
         printf("\npalindrome!");
