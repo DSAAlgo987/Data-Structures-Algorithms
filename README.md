@@ -40,13 +40,17 @@ This repository contains implementations of various data structures and algorith
   - Min Heap
   - Max Heap
   - Heap Operations (Insert, Delete, Heapify)
-- [Hashing](./Hash/Chaining)
-  - Hashing with Chaining
+- [Hashing](./Hash)
+  - [Hashing with Chaining](./Hash/Chaining)
+  - [Hashing with Linear Probing](./Hash/Linear%20Probing)
+  - [Hashing with Quadratic Probing](./Hash/Quadratic%20Probing)
+  - [Hashing with Double Hashing](./Hash/Double%20Hashing)
 
 ## Algorithms
 
 - [Sorting Algorithms](./sorting%20algo)
 - [Recursion](./recursion)
+- [Searching Algorithms](./search%20algo)
 
 ## Notes
 
