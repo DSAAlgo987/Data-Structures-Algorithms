@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+// imp : deletion will always done from the highest priority in fifo fashion
 struct Queue{
     int size;
     int front;
