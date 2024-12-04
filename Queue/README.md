@@ -44,10 +44,9 @@ Common operations performed on queues include:
 
 ## Implementations
 
-### Double Ended Queue
+### Double-Ended Queue (Deque)
 
-
-###PENDING PENIND PENDING
+A **Double-Ended Queue (Deque)** is a generalized form of a queue data structure in which the insertion and deletion operations can be performed from both ends (front and rear).
 
 
 

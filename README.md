@@ -28,7 +28,7 @@ This repository contains implementations of various data structures and algorith
   - Parenthesis Matching
   - Evaluation of Postfix & Prefix
 - [Queue](./Queue)
-  - Priority Queue using Linked List
+  - Priority Queue using Linked List & Array
   - Queue using Array
   - Queue using Linked List
   - Queue using Two Stacks
