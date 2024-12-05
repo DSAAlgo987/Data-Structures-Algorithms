@@ -189,6 +189,36 @@ void insertAfterPos(){
 }
 
 void deletePos(){
+    int x , i;
+    struct Node *temp , *prev , *last;
+    
+    printf("Enter the position to delete : ");
+    scanf("%d" , &x);
+    
+    temp = start;
+    for( i = 1 ;i != x && temp->next != start ; i++){
+        prev = temp;
+        temp = temp->next;
+    }
+    
+    if(i != x){
+        printf("value not found");
+        return;
+    }else if(temp == start){
+        last = temp;
+        while(last->next != start){
+            last = last->next;
+        }
+        
+        start = temp->next;
+        last->next = start;
+        free(temp);
+    }else {
+        prev->next = temp->next;
+        free(temp);
+    }
+}
+
     int x;
     struct Node *temp = start, *prev= NULL;
     
