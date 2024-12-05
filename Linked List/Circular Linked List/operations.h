@@ -218,37 +218,3 @@ void deletePos(){
         free(temp);
     }
 }
-
-    int x;
-    struct Node *temp = start, *prev= NULL;
-    
-    printf("Enter the node's position to delete : ");
-    scanf("%d" , &x);
-    
-    // for 1st node 
-    if(x == 1){
-        struct Node *last = start;
-        while(last->next !=  start){
-            last = last->next;
-        }
-        
-        last->next = start->next;
-        start = start->next; 
-        free(temp);
-        return;
-    }
-    
-    // for other nodes 
-    for(int i = 1 ; i<x; i++){
-        prev = temp;
-        temp = temp->next;
-        if(temp == start){ // if it is loopback to stack 
-            printf("Index out of bound.");
-            return; // we should exit from this so deletion will not happend
-        }
-    }
-    
-    // delete between and last node 
-    prev->next = temp->next;
-    free(temp);
-}
