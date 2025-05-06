@@ -1,5 +1,8 @@
 #include <stdio.h>
-#define INF 9999999
+#include <string.h>
+#include <limits.h>
+
+#define INF INT_MAX
 #define N 4 // Number of cities
 
 int dist[N][N] = {
@@ -23,6 +26,7 @@ int tsp(int mask, int pos) {
     int ans = INF;
     for (int city = 0; city < N; city++) {
         if (!(mask & (1 << city))) {
+             // city not yet visited
             int newAns = dist[pos][city] + tsp(mask | (1 << city), city);
             ans = (newAns < ans) ? newAns : ans;
         }
@@ -31,11 +35,7 @@ int tsp(int mask, int pos) {
 }
 
 int main() {
-    for (int i = 0; i < (1 << N); i++) {
-        for (int j = 0; j < N; j++) {
-            dp[i][j] = -1;
-        }
-    }
+    memset(dp, -1, sizeof(dp));
     printf("The minimum cost is %d\n", tsp(1, 0));
     return 0;
 }
