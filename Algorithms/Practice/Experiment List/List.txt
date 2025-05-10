@@ -1,0 +1,35 @@
+# Algorithms by Category
+
+## Divide and Conquer
+1. Min-Max algorithm (completed)
+2. Strassen's algorithm (completed)
+3. Merge sort 
+4. Quick Sort
+5. insertion sort (Incremental Approach) 
+
+## Greedy Method
+1. Fractional Knapsack
+2. Job Sequencing with Deadline (Not in experiment list)
+3. Kruskal's/Prim's algorithm
+4. Dijkstra's Algorithm (Single Source Shortest Path)
+5. Selection sort
+
+## Dynamic Programming
+1. Bellman Ford Algorithm
+2. Longest Common Subsequence (LCS) 
+3. Traveling Salesman Problem (TSP) (Not in experiment list)
+4. Multistage Graph  (Not in experiment list) 
+5. Coin Change Problem (Not in experiment list)
+6. 0/1 Knapsack 
+7. Matrix chain multiplication 
+8. All Pairs Shortest Path (Floyd Warshall) 
+
+## Backtracking
+1. N-Queen Problem
+2. Sum of Subset 
+3. Graph Coloring
+4. Hamiltonian Cycles
+
+## String Matching
+1. Knuth-Morris-Pratt (KMP) Algorithm
+2. Rabin Karp Algorithm
