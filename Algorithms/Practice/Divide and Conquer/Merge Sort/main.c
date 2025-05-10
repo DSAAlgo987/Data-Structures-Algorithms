@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
+
+#define SIZE 30000
 
 void Merge(int A[], int l, int mid, int h){
-    int B[100];
+    int B[SIZE];
     int i = l, j= mid + 1;
     int k = l;
     while(i <= mid && j <= h){
@@ -44,24 +47,55 @@ void MergeSort(int A[], int l, int h){
     }
 }
 
-int main(){
-    int A[] = {70, 3, 10, 15, 5, 4, 2, 1};
-    int n = sizeof(A)/ sizeof(A[0]);
-    clock_t start_t, end_t;
-    double total_t;
+void reverse(int A[], int n){
+    int temp[n];
 
-    start_t = clock();
-    MergeSort(A, 0, n-1);
-    end_t = clock();
-
-    printf("Sorted Array: \n");
-    for(int i = 0; i < n; i++){
-        printf("%d ", A[i]);
+    for(int i = 0; i < n;i++){
+        temp[i] = A[n - i - 1];
     }
 
-    total_t = (double) (end_t - start_t)/ CLOCKS_PER_SEC;
+    for(int i = 0; i < n; i++){
+        A[i] = temp[i];
+    }
+}
 
-    printf("\nTime Taken by CPU: %f", total_t);
+int main(){
+    int A[SIZE];
+    int n = SIZE;
+    clock_t t1, t2, t3, t4, t5, t6;
+    double total_t;
+
+    for(int i = 0; i < n; i++){
+        A[i] = rand() % 100;
+    }
+
+    // printf("Sorted Array: \n");
+    // for(int i = 0; i < n; i++){
+    //     printf("%d ", A[i]);
+    // }
+
+
+    t1 = clock();
+    MergeSort(A, 0, n-1);
+    t2 = clock();
+
+
+    total_t = (double) (t2 - t1)/ CLOCKS_PER_SEC;
+    printf("\nTime Taken to sort for random array: %f", total_t);
+
+    t3 = clock();
+    MergeSort(A, 0, n-1);
+    t4 = clock();
+
+    total_t = (double) (t4 - t3)/ CLOCKS_PER_SEC;
+    printf("\nTime Taken to sort for Sorted Array: %f", total_t);
+
+    t5 = clock();
+    MergeSort(A, 0, n-1);
+    t6 = clock();
+
+    total_t = (double) (t6 - t5)/ CLOCKS_PER_SEC;
+    printf("\nTime Taken to sort for Reverse Array: %f", total_t);
 
     return 0;
 }
