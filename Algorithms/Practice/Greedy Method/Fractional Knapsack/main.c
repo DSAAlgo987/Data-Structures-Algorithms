@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+// Time complexity : O(n^2)
+// Optimize using quick sort : O(nlogn)
+
 typedef struct {
     int profit;
     int weight;
