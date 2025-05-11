@@ -8,10 +8,10 @@
 5. insertion sort (Incremental Approach) (completed) 
 
 ## Greedy Method
-1. Fractional Knapsack
+1. Fractional Knapsack (completed)
 2. Job Sequencing with Deadline (Not in experiment list)
-3. Kruskal's/Prim's algorithm
-4. Dijkstra's Algorithm (Single Source Shortest Path)
+3. Kruskal's/Prim's algorithm (completed)
+4. Dijkstra's Algorithm (Single Source Shortest Path) (completed)
 5. Selection sort (completed)
 
 ## Dynamic Programming
@@ -20,7 +20,7 @@
 3. Traveling Salesman Problem (TSP) (Not in experiment list)
 4. Multistage Graph  (Not in experiment list) 
 5. Coin Change Problem (Not in experiment list)
-6. 0/1 Knapsack 
+6. 0/1 Knapsack (completed)
 7. Matrix chain multiplication 
 8. All Pairs Shortest Path (Floyd Warshall) 
 
