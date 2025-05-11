@@ -3,16 +3,16 @@
 ## Divide and Conquer
 1. Min-Max algorithm (completed)
 2. Strassen's algorithm (completed)
-3. Merge sort 
-4. Quick Sort
-5. insertion sort (Incremental Approach) 
+3. Merge sort (completed)
+4. Quick Sort (completed)
+5. insertion sort (Incremental Approach) (completed) 
 
 ## Greedy Method
 1. Fractional Knapsack
 2. Job Sequencing with Deadline (Not in experiment list)
 3. Kruskal's/Prim's algorithm
 4. Dijkstra's Algorithm (Single Source Shortest Path)
-5. Selection sort
+5. Selection sort (completed)
 
 ## Dynamic Programming
 1. Bellman Ford Algorithm
