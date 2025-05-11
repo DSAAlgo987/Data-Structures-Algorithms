@@ -7,7 +7,8 @@
         "stdlib.h": "c",
         "tree.h": "c",
         "stack.h": "c",
-        "random": "c"
+        "random": "c",
+        "limits.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

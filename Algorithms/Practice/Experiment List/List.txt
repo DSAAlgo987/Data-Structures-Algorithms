@@ -15,14 +15,14 @@
 5. Selection sort (completed)
 
 ## Dynamic Programming
-1. Bellman Ford Algorithm
+1. Bellman Ford Algorithm (completed)
 2. Longest Common Subsequence (LCS) 
 3. Traveling Salesman Problem (TSP) (Not in experiment list)
 4. Multistage Graph  (Not in experiment list) 
 5. Coin Change Problem (Not in experiment list)
 6. 0/1 Knapsack (completed)
 7. Matrix chain multiplication 
-8. All Pairs Shortest Path (Floyd Warshall) 
+8. All Pairs Shortest Path (Floyd Warshall) (completed)
 
 ## Backtracking
 1. N-Queen Problem
