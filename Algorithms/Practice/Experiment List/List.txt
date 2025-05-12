@@ -16,7 +16,7 @@
 
 ## Dynamic Programming
 1. Bellman Ford Algorithm (completed)
-2. Longest Common Subsequence (LCS) 
+2. Longest Common Subsequence (LCS) (completed)
 3. Traveling Salesman Problem (TSP) (Not in experiment list)
 4. Multistage Graph  (Not in experiment list) 
 5. Coin Change Problem (Not in experiment list)
@@ -25,8 +25,8 @@
 8. All Pairs Shortest Path (Floyd Warshall) (completed)
 
 ## Backtracking
-1. N-Queen Problem
-2. Sum of Subset 
+1. N-Queen Problem (completed)
+2. Sum of Subset (completed)
 3. Graph Coloring
 4. Hamiltonian Cycles
 
