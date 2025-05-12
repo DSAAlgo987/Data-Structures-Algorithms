@@ -73,6 +73,11 @@ int main(){
     printf("Enter no of queens: ");
     scanf("%d", &n);
 
+    if(n == 2 || n == 3){
+        printf("No solutions exists.");
+        return 0;
+    }
+
     nQueen(1, n);
 
 }
