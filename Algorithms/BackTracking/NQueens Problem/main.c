@@ -1,81 +1,77 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
+#include <stdlib.h>
+int board[20], count;
 
-#define MAX 10  // Maximum board size (you can change this based on needs)
+int main()
+{
+    int n, i, j;
+    void queen(int row, int n);
 
-char board[MAX][MAX];
-char solutions[100][MAX][MAX]; // Stores up to 100 solutions
-int solutionCount = 0;
+    printf(" - N Queens Problem Using Backtracking -");
+    printf("\n\nEnter number of Queens:");
+    scanf("%d", &n);
 
-bool isSafe(int row, int col, int n) {
-    int r, c;
-
-    // Check upward diagonal
-    for (r = row, c = col; r >= 0 && c >= 0; r--, c--) {
-        if (board[r][c] == 'Q') return false;
+    if(n == 2 || n == 3){
+        printf("\nNo Solutions exists.");
+        return 0;
     }
 
-    // Check left
-    for (c = col; c >= 0; c--) {
-        if (board[row][c] == 'Q') return false;
-    }
-
-    // Check downward diagonal
-    for (r = row, c = col; r < n && c >= 0; r++, c--) {
-        if (board[r][c] == 'Q') return false;
-    }
-
-    return true;
-}
-
-void copySolution(int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            solutions[solutionCount][i][j] = board[i][j];
-        }
-    }
-    solutionCount++;
-}
-
-void solve(int col, int n) {
-    if (col == n) {
-        copySolution(n);
-        return;
-    }
-
-    for (int row = 0; row < n; row++) {
-        if (isSafe(row, col, n)) {
-            board[row][col] = 'Q';
-            solve(col + 1, n);
-            board[row][col] = '.';
-        }
-    }
-}
-
-int main() {
-    int n = 4; // You can change the board size
-
-    // Initialize board with '.'
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            board[i][j] = '.';
-        }
-    }
-
-    solve(0, n);
-
-    printf("Total Solutions: %d\n", solutionCount);
-    for (int k = 0; k < solutionCount; k++) {
-        printf("Solution %d:\n", k + 1);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                printf("%c ", solutions[k][i][j]);
-            }
-            printf("\n");
-        }
-        printf("\n");
-    }
-
+    queen(1, n);
     return 0;
+}
+
+// function for printing the solution
+void print(int n)
+{
+    int i, j;
+    printf("\n\nSolution %d:\n\n", ++count);
+
+    for (i = 1; i <= n; ++i)
+        printf("\t%d", i);
+
+    for (i = 1; i <= n; ++i)
+    {
+        printf("\n\n%d", i);
+        for (j = 1; j <= n; ++j) // for nxn board
+        {
+            if (board[i] == j)
+                printf("\tQ"); // queen at i,j position
+            else
+                printf("\t-"); // empty slot
+        }
+    }
+}
+
+/*funtion to check conflicts
+If no conflict for desired postion returns 1 otherwise returns 0*/
+int place(int row, int column)
+{
+    int i;
+    for (i = 1; i <= row - 1; ++i)
+    {
+        // checking column and digonal conflicts
+        if (board[i] == column)
+            return 0;
+        else if (abs(board[i] - column) == abs(i - row))
+            return 0;
+    }
+
+    return 1; // no conflicts
+}
+
+// function to check for proper positioning of queen
+void queen(int row, int n)
+{
+    int column;
+    for (column = 1; column <= n; ++column)
+    {
+        if (place(row, column))
+        {
+            board[row] = column; // no conflicts so place queen
+            if (row == n)        // dead end
+                print(n);        // printing the board configuration
+            else                 // try queen with next position
+                queen(row + 1, n);
+        }
+    }
 }
