@@ -65,7 +65,7 @@ int hamCycleUtil(int graph[V][V], int path[], int pos) {
  prints the path. Please note that there may be more than one solutions,
  this function prints one of the feasible solutions. */
 int hamCycle(int graph[V][V]) {
-    int *path = new int[V];
+    int path[V];
     int i;
     for (i = 0; i < V; i++)
         path[i] = -1;
