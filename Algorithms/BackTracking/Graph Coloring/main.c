@@ -46,14 +46,14 @@ void graphColoring(int graph[V][V], int m) {
 
 int main() {
     int graph[V][V] = {
-        {0, 0, 0, 0, 0},
-        {0, 0, 1, 1, 0},
-        {0, 1, 0, 0, 1},
-        {0, 1, 0, 0, 1},
-        {0, 0, 1, 1, 0}
+       {0, 0, 0, 0, 0},
+        {0, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1},
+        {0, 0, 0, 1, 0}
     };
 
-    int m = 2; // Number of colors
+    int m = 3; // Number of colors
     graphColoring(graph, m);
     return 0;
 }
