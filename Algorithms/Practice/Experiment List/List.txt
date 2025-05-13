@@ -27,9 +27,9 @@
 ## Backtracking
 1. N-Queen Problem (completed)
 2. Sum of Subset (completed)
-3. Graph Coloring
-4. Hamiltonian Cycles
+3. Graph Coloring (completed)
+4. Hamiltonian Cycles (completed)
 
 ## String Matching
-1. Knuth-Morris-Pratt (KMP) Algorithm
-2. Rabin Karp Algorithm
+1. Knuth-Morris-Pratt (KMP) Algorithm (completed)
+2. Rabin Karp Algorithm (completed)

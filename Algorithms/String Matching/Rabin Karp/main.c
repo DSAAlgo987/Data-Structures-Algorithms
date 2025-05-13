@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
  
+// Reference: https://prepinsta.com/c-program/rabin-karp-algorithm/
+
 // d is the number of characters in input alphabet
 #define d 256
  
