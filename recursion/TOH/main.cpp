@@ -7,6 +7,14 @@ void solve(int s, int d, int h, int n){
         cout << "Move "<< n << " plate from "<< s << " " << d << endl;
         return;
     }
+
+    // Smaller input 
+    solve(s, h, d, n - 1);
+
+    cout << "Move "<< n << " plate from "<< s << " " << d << endl;
+
+    // Induction 
+    solve(h, d, s, n-1);
 }
 
 int main(){
