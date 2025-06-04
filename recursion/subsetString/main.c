@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-
+// Time complexity : O(2 ^ n)
 void subset(char *str, int index, char *substrs, int currentLen){
 
     // Base case 
