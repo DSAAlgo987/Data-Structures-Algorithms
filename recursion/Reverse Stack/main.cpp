@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void printStack(stack<int> &st){
+void printStack(auto &st){
     // BC 
     if(st.empty()){
         return;

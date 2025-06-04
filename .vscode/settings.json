@@ -9,7 +9,8 @@
         "stack.h": "c",
         "random": "c",
         "limits.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "ostream": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
