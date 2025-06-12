@@ -68,9 +68,10 @@ bool Anagram3(string s1, string s2){
 
 
 int main(){
-
+    
     string s1 = "silent", s2 = "listen";
     
+    cout << "Anagram Question" << endl;
     if(Anagram1(s1, s2)){
         cout << "Anagram1: True" << endl;
     }
