@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Time complexity : O(n * k) 
+// Not an optimal soln
+
 void solve(){
     vector<int> arr = {1, 3, -1, -3, 5, 3, 6, 7};
     int k = 3;
@@ -25,6 +28,10 @@ void solve(){
             // Slide window
             if(arr[i] == mx){
                 mx = INT_MIN;
+                // Reset max 
+                for(int m = i + 1; m <= j; m++){
+                    mx = max(mx, arr[m]);
+                }
             }
             i++;
             j++;
