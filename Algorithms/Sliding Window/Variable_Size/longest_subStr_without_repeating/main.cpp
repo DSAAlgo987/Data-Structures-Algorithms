@@ -7,6 +7,11 @@ int longestSubstringWithoutRepeating(string &s){
     int i = 0, j = 0, mx = INT_MIN; 
     unordered_map<char, int> mp;
 
+    // Base case 
+    if(s.size() == 0){
+        return 0;
+    }
+
     while(j < s.size()){
         // Calculation
         mp[s[j]]++;
@@ -38,7 +43,7 @@ int longestSubstringWithoutRepeating(string &s){
 }
 
 int main(){
-    string s = "geeksforgeeks";
+    string s = "";
 
     int ans = longestSubstringWithoutRepeating(s);
 
