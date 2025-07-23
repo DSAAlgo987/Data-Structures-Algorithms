@@ -37,10 +37,22 @@ int strStr(string haystack, string needle)
     return -1;
 }
 
+// Simpler one 
+int strstr(string s1, string s2){
+    for(int i = 0; i < s1.size(); i++){
+        if(s1.substr(i, s2.size()) == s2){
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
 int main()
 {
     string s1 = "shahar", s2 = "har";
-    int ans = strStr(s1, s2);
+    int ans = strstr(s1, s2);
 
     cout << ans << endl;
     return 0;
