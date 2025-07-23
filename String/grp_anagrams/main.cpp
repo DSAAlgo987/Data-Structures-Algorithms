@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// nlgn
+// n* klgk
 vector<vector<string>> groupAnagrams(vector<string> str){
     unordered_map<string, vector<string>> mp;
 
