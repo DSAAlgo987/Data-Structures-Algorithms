@@ -7,7 +7,7 @@ vector<vector<string>> groupAnagrams(vector<string> str){
 
     for(auto &s: str){
         string sorted_str = s;
-        sort(sorted_str.begin(), sorted_str.end());
+        sort(sorted_str.begin(), sorted_str.end()); // klgk 
 
         mp[sorted_str].push_back(s);
     }
