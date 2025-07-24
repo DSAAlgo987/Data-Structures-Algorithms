@@ -23,10 +23,7 @@ int pickToys(string &str, int k){
         // calculation 
         mp[str[j]]++;
 
-        if(mp.size() < k){
-            j++;
-        }
-        else  if(mp.size() == k){
+        if(mp.size() <= k){
             // ans <- calculation 
             mx = max(mx, j - i + 1);
             j++;
