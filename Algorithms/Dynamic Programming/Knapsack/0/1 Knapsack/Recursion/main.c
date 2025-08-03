@@ -5,7 +5,7 @@ int max(int a, int b){
 }
 
 
-// Knapsack
+// Knapsack Time complexity: O(2^n)
 int Knapsack(int wt[], int val[], int W, int n){
     // base condition 
     if(n == 0 || W == 0){
