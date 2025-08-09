@@ -18,3 +18,16 @@ public:
         }
     }
 };
+
+// Optimized Approach: 
+// Time complexity: O(1)
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n > 0){
+            return !(n & (n - 1)) ? true: false;
+        }
+        return false;
+    }
+};
