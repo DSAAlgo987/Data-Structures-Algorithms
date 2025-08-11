@@ -51,7 +51,7 @@ int minSubsetSum(vector<int> &arr){
 
     // Step 3: filter nth row from dp table to range / 2 & store in s1 vector
     vector<int> s1;
-    for(int j = n; j < range / 2; j++){
+    for(int j = 0; j < range / 2; j++){
         if(t[n][j] == true){
             s1.push_back(j);
         }
@@ -59,7 +59,7 @@ int minSubsetSum(vector<int> &arr){
 
     // Step 4: now apply formula to find min subset differnce (range - 2S1[i])
     int mn = INT_MAX;
-    for(int i = 0; i < range / 2; i++){
+    for(int i = 0; i < s1.size(); i++){
         mn = min(mn, range - 2 * s1[i]);
     }
 
