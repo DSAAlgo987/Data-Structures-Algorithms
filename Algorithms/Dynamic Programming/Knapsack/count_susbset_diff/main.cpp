@@ -11,10 +11,10 @@ using namespace std;
 
 /*
     REASON 1:
-    Pehle hum first column ko 1 se initialise kar rahe the, 
+    Pehle hum first column ko 1 se initialise kar rahe the,
     yeh assume karke ki sirf ek hi tarika hai subset sum = 0 banane ka,
     jo hai empty subset {}.
-    Lekin agar array me 0 present hai, 
+    Lekin agar array me 0 present hai,
     toh subsets banenge: {} aur {0}, dono ka sum 0 hoga.
     Matlab ek se zyada tarike ho sakte hain sum==0 banane ke.
     FIX:
@@ -31,32 +31,48 @@ using namespace std;
     Agar odd hai, toh target fractional hoga jo possible nahi hai.
 */
 
-int dp[102][1002]; // Declaration
-int M = 1e9 + 7; // 10^9 + 7
+vector<vector<int>> t;
+int M = 1e9 + 7;
 
-// Time complexity: O(n^2)
-int countSubsetsDiff(int n, int d, vector<int> &arr)
+int countSubsetsDiff(vector<int> &arr, int d)
 {
-    int sum = 0;
+    // Code here
+    int n = arr.size();
+
+    int sumOfArr = 0;
+    // First caculate whole array's sum
     for (auto i : arr)
-        sum += i;
-    if ((d + sum) % 2 != 0)
+    {
+        sumOfArr += i;
+    }
+
+    // Check feasibility: if odd or d is greater than sum of arr.
+    if ((d + sumOfArr) % 2 != 0 || d > sumOfArr)
         return 0;
-    int t = (d + sum) / 2;
-    // REDUCED: find count of subset with sum equal to t
-    vector<vector<int>> dp(n + 1, vector<int>(t + 1, 0));
-    dp[0][0] = 1;
+
+    // Calculate sum1 using the formula:
+    int sum1 = (d + sumOfArr) / 2;
+
+    t.assign(n + 1, vector<int>(sum1 + 1, 0)); // Initialize with all 0s
+
+    t[0][0] = 1;
+    // Start filling remaining parts : n -> i, sum -> j
     for (int i = 1; i < n + 1; i++)
     {
-        for (int j = 0; j < t + 1; j++)
+        for (int j = 0; j < sum1 + 1; j++)
         {
             if (arr[i - 1] <= j)
-                dp[i][j] = (dp[i - 1][j] + dp[i - 1][j - arr[i - 1]]) % M;
+            {
+                t[i][j] = (t[i - 1][j - arr[i - 1]] + t[i - 1][j]) % M;
+            }
             else
-                dp[i][j] = dp[i - 1][j];
+            {
+                t[i][j] = t[i - 1][j];
+            }
         }
     }
-    return dp[n][t];
+
+    return t[n][sum1];
 }
 
 int main()
@@ -64,7 +80,7 @@ int main()
     vector<int> arr = {0, 1, 2, 2, 2, 3, 0, 3, 0, 1};
     int diff = 12;
 
-    cout << "Final count: " << countSubsetsDiff(arr.size(), diff, arr) << endl;
+    cout << "Final count: " << countSubsetsDiff(arr, diff) << endl;
 
     return 0;
 }
