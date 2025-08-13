@@ -32,7 +32,7 @@ public:
     }
 };
 
-// Log based: O(1) : This will satisfy all the test cases.
+// Log based: O(1) : This will not satisfy all the test cases.
 class Solution {
 public:
     bool isPowerOfThree(int n) {
