@@ -12,7 +12,7 @@ using namespace std;
  * T/F
  */
 
-// O(V + E)
+// O(V + E) : Bcoz here i used adj list insetead of adj. matrix
 bool dfs(int n, vector<vector<int>> &adj, int src, int dst) {
     stack<int> st;
     vector<int> visited(n, false); // Initially no one visited 
