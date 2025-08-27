@@ -13,7 +13,7 @@ using namespace std;
 
 // Tabular approach: O(n * m)
 int LCS(string x, string y, int m, int n) {
-    vector<vector<int>> t(n + 1,vector(m + 1, 0)); // Initialization with 0s
+    vector<vector<int>> t(n + 1,vector<int>(m + 1, 0)); // Initialization with 0s
 
     // Start filling, remaining cells(sub-problems): i -> n, j -> m
     for(int i = 1; i < n + 1; i ++) {
