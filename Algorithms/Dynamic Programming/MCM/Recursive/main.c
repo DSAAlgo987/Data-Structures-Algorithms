@@ -1,34 +1,35 @@
-#include <stdio.h>
-#include <limits.h>
+#include <bits/stdc++.h>
+using namespace std;
 
-int solve(int arr[], int i, int j){
-    // Base condition
-    if(i >= j){
+/*
+    Problem Statement: Matrix Chain Multiplication
+    Recursive Approach: 
+    Time complexity: O(2^n)
+*/
+int solve(vector<int> &A, int i, int j) {
+    // Base condition 
+    if(i >= j) {
         return 0;
     }
     
-    int min = INT_MAX;
-    // k loop
-    for(int k = i; k <= j-1; k++){
-        // temp ans 
-        int tempAns = solve(arr, i, k) + solve(arr, k+1, j) + arr[i-1] * arr[k] * arr[j];
+    int mn = INT_MAX;
+    
+    // find k loop scheme 
+    for(int k = i; k <= j-1; k++) {
+        // Calc tempAns
+        int tempAns = solve(A, i, k) + solve(A, k+1, j) + A[i-1] * A[k] * A[j];
         
-        // Idenitfy min cost from temp ans 
-        if(tempAns < min){
-            min = tempAns;
-        }
+        // Calc ans from tempAns 
+        mn = min(mn, tempAns);
     }
     
-    return min;
+    return mn;
 }
 
-int main()
-{
-    int arr[] = {40, 20, 30, 10, 30};
+int main() {
+    vector<int> arr = {40, 20, 30, 10, 30};
     
-    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << solve(arr, 1, arr.size() - 1) << endl; // op : 26000
     
-    printf("Min Cost: %d", solve(arr, 1, n-1));
-
     return 0;
 }
