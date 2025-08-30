@@ -4,7 +4,7 @@ using namespace std;
 /*
     Problem Statement: Matrix Chain Multiplication
     Memoize(Top down) Approach: 
-    Time complexity: O(2^n)
+    Time complexity: O(n^2)
 */
 
 vector<vector<int>> t; // Global declaration 
