@@ -40,7 +40,7 @@ int allocatePages(v &arr, int k) {
     
     // Base case 
     if(n < k) {
-        return false;
+        return -1;
     }
     
     int start = *max_element(arr.begin(), arr.end()); // Returns iterator (Max element in arr)
