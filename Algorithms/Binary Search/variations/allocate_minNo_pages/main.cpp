@@ -23,7 +23,7 @@ bool isValid(v &arr, int n, int k, int mx) {
         
         if(sum > mx) {
             students++;
-            sum = mx;
+            sum = arr[i];
         }
         
         if(students > k) {
