@@ -11,6 +11,8 @@ using namespace std;
  * APROACH 2: MxHeap -> nlogk (Optimized)
  * 
  * There can be many variations like k1 smallest and k2 smallest can be asked.
+ * 
+ * *When an array is passed to a function, it decays to a pointer, so range-based for loops no longer work because the size information is lost.
  */
 
 // Aliases 
