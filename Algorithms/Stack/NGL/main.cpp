@@ -51,19 +51,18 @@ v NGLOptimized(v &arr) {
     v ans;
     stack<int> st;
 
-    // Iterate arr from backward direction 
+    // Iterate arr from forward direction 
     for(int i = 0; i < n; i++) {
         // 1. Stack is empty 
         if(st.size() == 0) {
             ans.push_back(-1);
         }
 
-        // 2. St.top > arr[i] 
+        // 2. St.top < arr[i] 
         else if(st.size() > 0 && st.top() > arr[i]) {
             ans.push_back(st.top());
         }
 
-        // 3. st.top <= arr[i] 
         else if(st.size() > 0 && st.top() <= arr[i]) {
             // pop -> 1. st empty 2.st.top > arr[i]
             while(st.size() > 0 && st.top() <= arr[i]) {

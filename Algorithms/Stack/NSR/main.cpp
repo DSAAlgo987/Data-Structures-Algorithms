@@ -2,7 +2,7 @@
 using namespace std;
 
 /**
- * PS: Nearest Smaller to Left (NSL) 
+ * PS: Nearest Smaller to Right (NSR) 
  * IP: vector<int> arr;
  * OP: vector<int> arrOfSmallerElements
  * 
@@ -26,11 +26,10 @@ v NGL(v &arr) {
     int n = arr.size();
     v ans(n, -1);
     bool found = false;
-    // For first element
 
-    for(int i = 1; i < n; i++) {
-        for(int j = i - 1; j >= 0; j--) {
-            // Next_element > Current_element
+    for(int i = 0; i < n - 1; i++) {
+        for(int j = i + 1; j < n; j++) {
+            // Next_element < Current_element
             if(arr[j] < arr[i]) {
                 ans[i] = arr[j];
                 found = true;
@@ -51,14 +50,14 @@ v NGLOptimized(v &arr) {
     v ans;
     stack<int> st;
 
-    // Iterate arr from forward direction 
-    for(int i = 0; i < n; i++) {
+    // Iterate arr from backward direction 
+    for(int i = n - 1; i >= 0; i--) {
         // 1. Stack is empty 
         if(st.size() == 0) {
             ans.push_back(-1);
         }
 
-        // 2. St.top > arr[i] 
+        // 2. St.top < arr[i] 
         else if(st.size() > 0 && st.top() < arr[i]) {
             ans.push_back(st.top());
         }
@@ -82,6 +81,9 @@ v NGLOptimized(v &arr) {
         st.push(arr[i]);
     }
 
+    // Reverse ans vector 
+    reverse(ans.begin(), ans.end());
+
     return ans;
 }
 
@@ -90,9 +92,9 @@ int main(){
     v ans;
 
     ans = NGL(arr);
-    print(ans); // OP: -1 4 -1 2 2
+    print(ans); // OP: 2 2 -1 8 -1
 
     ans = NGLOptimized(arr);
-    print(ans); // OP: -1 4 -1 2 2
+    print(ans); // OP: 2 2 -1 8 -1
     return 0;
 }
