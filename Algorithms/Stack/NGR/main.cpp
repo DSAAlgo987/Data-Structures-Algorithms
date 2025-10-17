@@ -24,20 +24,24 @@ void print(v &arr) {
 // Brute Force - n^2
 v NGL(v &arr) {
     int n = arr.size();
-    v ans;
+    v ans(n, -1);
+    bool found = false;
 
     for(int i = 0; i < n - 1; i++) {
         for(int j = i + 1; j < n; j++) {
             // Next_element > Current_element
             if(arr[j] > arr[i]) {
-                ans.push_back(arr[j]);
+                ans[i] = arr[j];
+                found = true;
                 break;
             }
+        }
+        if(!found) {
+            ans[i] = -1;
         }
     }
 
     // For last element push -1
-    ans.push_back(-1);
 
     return ans;
 }

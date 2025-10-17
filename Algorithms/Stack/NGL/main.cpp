@@ -24,20 +24,23 @@ void print(v &arr) {
 // Brute Force - n^2
 v NGL(v &arr) {
     int n = arr.size();
-    v ans;
+    v ans(n, -1);
+    bool found = false;
+    // For first element
 
-    for(int i = 0; i < n - 1; i++) {
-        for(int j = i + 1; j < n; j++) {
+    for(int i = 1; i < n; i++) {
+        for(int j = i - 1; j >= 0; j--) {
             // Next_element > Current_element
             if(arr[j] > arr[i]) {
-                ans.push_back(arr[j]);
+                ans[i] = arr[j];
+                found = true;
                 break;
-            }
+            } 
+        }
+        if(!found) {
+            ans[i] = -1;
         }
     }
-
-    // For last element push -1
-    ans.push_back(-1);
 
     return ans;
 }
@@ -49,7 +52,7 @@ v NGLOptimized(v &arr) {
     stack<int> st;
 
     // Iterate arr from backward direction 
-    for(int i = n - 1; i >= 0; i--) {
+    for(int i = 0; i < n; i++) {
         // 1. Stack is empty 
         if(st.size() == 0) {
             ans.push_back(-1);
@@ -80,9 +83,6 @@ v NGLOptimized(v &arr) {
         st.push(arr[i]);
     }
 
-    // Reverse ans to get the actual restul 
-    reverse(ans.begin(), ans.end());
-
     return ans;
 }
 
@@ -91,9 +91,9 @@ int main(){
     v ans;
 
     ans = NGL(arr);
-    print(ans); // OP: 3 4 4 -1
+    print(ans); // OP: -1 -1  3 -1
 
     ans = NGLOptimized(arr);
-    print(ans); // OP: 3 4 4 -1 
+    print(ans); // OP: -1 -1  3 -1
     return 0;
 }
