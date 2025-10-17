@@ -2,7 +2,7 @@
 using namespace std;
 
 /**
- * PS: Nearest Greater to Right (NGR) | Next Largest Element
+ * PS: Nearest Greater to Left (NGL) 
  * IP: vector<int> arr;
  * OP: vector<int> arrOfGreaterElements
  * 
