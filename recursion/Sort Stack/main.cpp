@@ -1,56 +1,67 @@
 #include <bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
 
-void printStack(stack<int> &st){
-    // Base condition 
-    if(st.empty()){
-        return;
+// Problem Sort A Stack in ASC/DESC order 
+
+// ALiase
+using st = stack<int>; 
+
+// Display Stack 
+void displayStack(st &s) {
+    while(s.size() != 0) {
+        cout << s.top() << " "; 
+        s.pop();
     }
-    int top = st.top();
-    st.pop();
-    printStack(st);
-    cout << top << " ";
+    cout << endl;
 }
 
-void inSort(stack<int> &st, int temp){
+// Insert Element in stack at valid position 
+void insert(st &s, int temp) {
     // Base condition 
-    if(st.empty() || st.top() <= temp){
-        st.push(temp);
+    if(s.size() == 0 || s.top() <= temp) {
+        s.push(temp);
         return;
     }
-    int top = st.top();
-    st.pop();
-    inSort(st, temp);
-    st.push(top);
+    
+    // Induction: making the ip smaller 
+    int x = s.top(); 
+    s.pop();
+    
+    insert(s, temp);
+    
+    s.push(x);
 }
 
-void sortStack(stack<int> &st){
+// Sort stack
+void sortStack(st &s) {
     // Base condition 
-    if(st.size() == 1){
+    if(s.size() == 1) {
         return;
     }
-
-    // Induction 
-    int temp = st.top(); 
-    st.pop();
-    sortStack(st);
-    inSort(st, temp);
+    
+    // Induction: Making the ip smaller 
+    int temp = s.top(); 
+    s.pop(); 
+    
+    sortStack(s); 
+    insert(s, temp); 
+    
 }
 
-
-int main(){
-    stack<int> st;
-
-    st.push(0);
-    st.push(5);
-    st.push(1);
-    st.push(2);
-
+int main()
+{
+    st s;
+    s.push(0);
+    s.push(5);
+    s.push(2);
+    s.push(1);
+    
     // Hypothesis
-    sortStack(st);
-
-    printStack(st);
-
+    sortStack(s);
+    
+    displayStack(s);
 
     return 0;
 }
