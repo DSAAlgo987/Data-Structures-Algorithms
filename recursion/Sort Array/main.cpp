@@ -1,51 +1,63 @@
 #include <bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
 
-// Auto keyword can be used in function parameter only in C++ 20 version
+// Problem: Sort array in ascending order 
 
-void printArray(vector<int> &v){
-    for(auto i: v){
-        cout << i << " ";
+// Aliases
+using v = vector<int>; 
+
+// Display arr 
+void displayArr(v &arr) {
+    for(auto ele: arr){ 
+        cout << ele << " ";
     }
+    cout << endl; 
 }
 
-void insort(vector<int> &v, int temp){
+// Insert temp element at correct position 
+void insort(v &arr, int temp) { 
     // Base condition 
-    if(v.size() == 0 || v[v.size()-1] <= temp){
-        v.push_back(temp);
+    if(arr.size() == 0 || arr[arr.size() - 1] <= temp) {
+        arr.push_back(temp);
+        return; 
+    }
+    
+    // Make the ip smaller 
+    int v = arr[arr.size() - 1];
+    arr.pop_back();
+    
+    insort(arr, temp);
+    
+    // push the popped element form the vector
+    arr.push_back(v);
+}
+
+// SortArr 
+void sortArr(v &arr) {
+    // Base condition 
+    if(arr.size() == 1) {
         return;
     }
-
-    // Induction 
-    int value = v[v.size() - 1];
-    v.pop_back();
-
-    insort(v, temp);
-
-    v.push_back(value);
-    return;
+    
+    // Induction: Make ip smaller 
+    int temp = arr[arr.size() - 1]; 
+    arr.pop_back();
+    
+    sortArr(arr); 
+    
+    insort(arr, temp);
 }
 
-void sortArray(vector<int> &v){
-    // Base condition 
-    if(v.size() == 1){
-        return;
-    }
 
-    // Induction 
-    int temp = v[v.size() - 1];
-    v.pop_back();
-    sortArray(v);
-    insort(v, temp);
-}
 
-int main(){
-    vector<int> v = {0, 1, 5, 2};
-
-    // Hypothesis
-    sortArray(v);
-
-    printArray(v);
-
+int main()
+{
+    v arr = { 1, 5, 0, 2};
+    
+    sortArr(arr); 
+    
+    displayArr(arr); 
     return 0;
 }
