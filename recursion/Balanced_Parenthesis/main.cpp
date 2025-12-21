@@ -1,46 +1,50 @@
 #include <bits/stdc++.h>
+#include <iostream>
 
-using namespace std;
+using namespace std; 
 
-void solve(int open, int close, string op, vector<string> &v){
+/*
+    PS: Well Balanced Parenthesis
+    IP: n = 3 (open = 3, close = 3)
+    OP: ((())), ()()(), (())(), ()(()), (()())
+    TC: O(2^n)
+    SC: n 
+*/
+
+// Aliases 
+using v = vector<string>;
+
+v ans;
+
+// Display array 
+void display(v &ans) {
+    for(auto ele: ans) {
+        cout << ele << " ";
+    }
+    
+    cout << endl;
+}
+
+// Well Balanced Parenthesis 
+void solve(int o, int c, string op, v &ans) {
     // Base condition 
-    if(open == 0 && close == 0){
-        v.push_back(op);
+    if(o == 0 && c == 0) {
+        ans.push_back(op);
         return;
     }
-
-    // Choices 
-    if(open != 0){
-        string op1 = op;
-        op1.push_back('(');
-        solve(open - 1, close, op1, v);
+    
+    if(o != 0) {
+        solve(o - 1, c, op + '(', ans);
     }
-
-    // Choices
-    if(close > open){
-        string op2 = op;
-        op2.push_back(')');
-        solve(open, close - 1, op2, v);
+    if(c > o) {
+        solve(o, c - 1, op + ')', ans);
     }
 }
 
-void printVector(vector<string> &v){
-    for(auto s: v){
-        cout << s << endl;
-    }
-}   
+int main()
+{
+    solve(3, 3, "", ans);
+    display(ans);
 
-int main() {
-    vector<string> v;
-    int n = 3;
-
-    int open = n;
-    int close = n;
-
-    string op = "";
-
-    solve(open, close, op, v);
-
-    printVector(v);
     return 0;
 }
