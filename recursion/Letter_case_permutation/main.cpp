@@ -1,45 +1,47 @@
 #include <bits/stdc++.h>
+#include <stdio.h>
 
-using namespace std;
+using namespace std; 
 
-void solve(string ip, string op){
+/* 
+    Problem: Letter Case Permuation
+    IP: a1b2
+    OP: {a1b2, a1B2, A1b2, A1B2}
+    Time complexity: O(2^n)
+    Space complexity: O(n)
+    
+    Methods: tolower(), toupper() & isalpha() returns ASCII(INT) values 
+*/
+
+//  Letter Case Permuation
+void solve(string ip, string op, int idx) {
     // Base condition 
-    if(ip.size() == 0){
+    if(idx == ip.length()) {
         cout << op << endl;
         return;
     }
-
-    // Copy op in op1 and op2 
-    string op1 = op;
-    string op2 = op;
-
-    if(!isalpha(ip[0])){
-        // Add char in lower case 
-        op1.push_back(ip[0]);
-        ip.erase(ip.begin() + 0);
-        solve(ip, op1);
-
-        return;
-    }
-    // Add char in lower case 
-    op1.push_back(tolower(ip[0]));
     
-    // Add char in upper case
-    op2.push_back(toupper(ip[0]));
-
-    // Remove first char from ip string
-    ip.erase(ip.begin() + 0);
-
-    // Again call for other chars 
-    solve(ip, op1);
-    solve(ip, op2);
+    // Not an alphabet 
+    if(!isalpha(ip[idx])) {
+        solve(ip, op + ip[idx], idx + 1);
+        
+    } else {
+        // Case Change: Lower 
+        solve(ip, op + char(tolower(ip[idx])), idx + 1);
+        
+        // Case Change: Upper 
+        solve(ip, op + char(toupper(ip[idx])), idx + 1);
+    }
+    
 }
 
-int main() {
-    string ip = "a1B2";
-
-    string op;
-
-    solve(ip, op);
+int main()
+{
+    string ip = "a1b2";
+    string op = "";
+    
+    
+    solve(ip, op, 0);
+    
     return 0;
 }
