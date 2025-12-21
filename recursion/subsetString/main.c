@@ -4,7 +4,7 @@
 using namespace std; 
 
 /* 
-    Problem: Print Unique Subsets
+    Problem: Print Unique Subsets/Substrings
     Time complexity: O(2^n)
     Space complexity: O(n. 2^n)
 */
