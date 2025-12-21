@@ -1,40 +1,42 @@
 #include <bits/stdc++.h>
+#include <iostream>
 
-using namespace std;
+using namespace std; 
 
-void solve(string op, int zero, int one, int N){
+/*
+    PS: Print N Binary no where 1's >= 0's in all it's prefixes
+    IP: n = 3 
+    OP: 111,110,101,100
+    TC: O(2^n)
+    SC: n 
+*/
+
+void solve(int n, int z, int o, string op) {
     // Base condition 
-    if(N == 0){
+    if(n == 0) {
         cout << op << endl;
         return;
     }
-
-    // Single Choice: Add 1 when zero == one
-    if(zero == one){
-        string op1 = op;
-        op1.push_back('1');
-        solve(op1, zero, one + 1, N - 1);
-    }
-    // Double choices: Add 1 or 0 
-    else{
-       string op1 = op;
-       op1.push_back('1');
-       solve(op1, zero, one + 1, N - 1);
-       
-       string op2 = op;
-       op2.push_back('0');
-       solve(op2, zero + 1, one, N - 1);
+    
+    // Single choice: Add 1 
+    if(z == o) {
+        // Add 1
+        solve(n-1, z, o + 1, op + '1');
+    } 
+    // Double Choice: Add 1/0
+    else {
+        // Add 1 
+        solve(n-1, z, o + 1, op + '1');
+        
+        // Add 0 
+        solve(n-1, z + 1, o, op + '0');
     }
 }
 
-int main() {
-    int N = 3;
-    int zero = 0;
-    int one = 0;
 
-    string op = "";
-
-    solve(op, zero , one , N);
+int main()
+{
+    solve(3, 0, 0, "");
 
     return 0;
 }
