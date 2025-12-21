@@ -1,38 +1,40 @@
 #include <bits/stdc++.h>
+#include <stdio.h>
 
-using namespace std;
+using namespace std; 
 
-void solve(string ip, string op){
+/* 
+    Problem: Permutation with case Change
+    IP: ab
+    OP: {ab, aB, Ab, AB}
+    Time complexity: O(2^n)
+    Space complexity: O(n)
+    
+    Methods: tolower(), toupper() returns ASCII(INT) values 
+*/
+
+// Permuation with spaces 
+void solve(string ip, string op, int idx) {
     // Base condition 
-    if(ip.size() == 0){
+    if(idx == ip.length()) {
         cout << op << endl;
         return;
     }
-
-    // Copy op in op1 and op2 
-    string op1 = op;
-    string op2 = op;
-
-    // Add smaller char in op1 
-    op1.push_back(tolower(ip[0]));
-
-    // Add capital char in op2
-    op2.push_back(toupper(ip[0]));
-
-    // Erase first char in ip 
-    ip.erase(ip.begin() + 0);
-
-    // Agagin call solve for other chars
-    solve(ip, op1);
-    solve(ip, op2);
-
+    
+    // Case Change: Lower 
+    solve(ip, op + char(tolower(ip[idx])), idx + 1);
+    
+    // Case Change: Upper 
+    solve(ip, op + char(toupper(ip[idx])), idx + 1);
 }
 
-int main() {
+int main()
+{
     string ip = "ab";
-
-    string op;
-
-    solve(ip, op);
+    string op = "";
+    
+    
+    solve(ip, op, 0);
+    
     return 0;
 }
