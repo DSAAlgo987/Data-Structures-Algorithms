@@ -1,57 +1,99 @@
 #include <bits/stdc++.h>
-
-using namespace std; 
+using namespace std;
 
 /**
-    PS: Check presence of sum in the given array. If yes -> TRUE, no -> FALSE 
-    Constraints: 
-    n = 100;
-    sum = 1000;
-*/
+ * PS: Subset Sum Problem
+ *
+ * Problem:
+ *   Given a set of integers, determine whether there exists
+ *   a subset whose sum is equal to a given target sum.
+ *   Each element can be chosen at most once.
+ *
+ * IP:
+ *   - vector<int> arr  → input set of numbers
+ *   - int sum          → target sum
+ *
+ * OP:
+ *   - true  → if a subset with given sum exists
+ *   - false → otherwise
+ *
+ * APPROACH:
+ *   - Dynamic Programming (Bottom-Up / Tabulation)
+ *   - For each element, decide whether to:
+ *       1. Include it in the subset
+ *       2. Exclude it from the subset
+ *   - Store results of subproblems in a DP table
+ *
+ * DP STATE:
+ *   - t[i][j] → true if a subset with sum j can be formed
+ *               using the first i elements
+ *
+ * BASE CASE (Initialization):
+ *   - t[i][0] = true   → sum 0 is always possible (empty subset)
+ *   - t[0][j] = false  → no elements cannot form positive sum
+ *
+ * TRANSITION:
+ *   - If arr[i-1] ≤ j:
+ *       t[i][j] = t[i-1][j - arr[i-1]] || t[i-1][j]
+ *   - Else:
+ *       t[i][j] = t[i-1][j]
+ *
+ * TC:
+ *   - O(n × sum)
+ *
+ * SC:
+ *   - O(n × sum)  → DP table
+ *
+ * VARIATION:
+ *   - 0/1 Knapsack (Boolean version)
+ *
+ * LEARNING:
+ *   - How Subset Sum is a direct variation of 0/1 Knapsack
+ *   - Mapping:
+ *       arr[] → weights
+ *       sum   → knapsack capacity
+ *   - Difference between value-maximization (Knapsack)
+ *     and feasibility checking (Subset Sum)
+ *   - Understanding DP initialization for boolean problems
+ *   - Translating recursive include/exclude choices
+ *     into iterative DP logic
+ */
 
-int t[102][1002]; // DP declaration 
+// Aliases 
+using v = vector<int>;
+using vv = vector<v>;
 
-
-// Bottom up approach 
-bool sumSubset(vector<int> &arr, int sum){
+// Subset Sum Function 
+bool subsetSum(v &arr, int sum) {
     int n = arr.size();
+    // DP 
+    vv t(n + 1, v(sum + 1, false));
 
-    // Intilize dp 
-    for(int i = 0; i < n + 1; i++){
-        for(int j = 0; j < sum + 1; j++){
-            if(i == 0){
-                t[i][j] = false;
-            }
-
-            if(j == 0){
-                t[i][j] = true;
+    // Initialization of (0th column = true)
+    for(int i = 0; i < n + 1; i++) {
+        t[i][0] = true;
+    }
+        
+    // Iterative code: Start filling with i = 1, j = 1 
+    for(int i = 1; i < n + 1; i++) {
+        for(int j = 1; j < sum + 1; j++) {
+            if(arr[i-1] <= j) {
+                t[i][j] = t[i-1][j - arr[i-1]] || t[i-1][j];
+            } else {
+                t[i][j] = t[i-1][j];
             }
         }
     }
 
-    // Start tabular method : n -> i, sum -> j
-    for(int i = 1; i < n + 1; i++){
-        for(int j = 1; j < sum + 1; j++){
-            // if current element <= sum 
-            if(arr[i-1] <= j){
-                t[i][j] = t[i-1][j-arr[i-1]] // Include 
-                          || 
-                          t[i-1][j]; // Exclude 
-            }
-            else { 
-                t[i][j] = t[i-1][j]; // Exclude 
-            }
-        }
-    }
-
-    // Return ans: T/F
+    // Return ans 
     return t[n][sum];
 }
 
 int main(){
-    vector<int> arr = {2, 3, 7, 8, 10};
-    int sum = 11;
+    v arr = {2, 3, 7, 8, 10};
+    int sum = 11; 
 
-    cout << (sumSubset(arr, sum) ? "TRUE" : "FALSE") << endl;
+    cout << (subsetSum(arr, sum) ? "TRUE" : "FALSE") << endl;
+
     return 0;
 }
