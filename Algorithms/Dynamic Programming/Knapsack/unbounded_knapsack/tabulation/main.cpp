@@ -2,18 +2,42 @@
 using namespace std;
 
 /**
- * In unbounded knapsack: Multiple instances of same item are allowed to put into the knapsack.
- * 
- * Ip: 
- * wt[], val[], W 
- * 
- * Op:
- * Max profit
- * 
- * Constraints: 
- * 1 <= n <= 100
- * 1 <= W <= 1000
- */
+
+* PS: Unbounded Knapsack
+*
+* Problem:
+* Given weights and values of items, and a knapsack capacity W,
+* determine the maximum profit when an item can be chosen
+* unlimited number of times.
+*
+* IP:
+* * vector<int> wt   → weights of items
+* * vector<int> val  → values of items
+* * int W            → knapsack capacity
+*
+* OP:
+* * int → maximum achievable profit
+*
+* APPROACH:
+* Bottom-Up Dynamic Programming (Tabulation)
+*
+* TC:
+* * O(n * W)
+*
+* SC:
+* * O(n * W)
+*
+* LEARNING:
+* * Unlike 0/1 Knapsack, an item can be picked multiple times.
+* * This is possible because we stay on the same item index
+* after picking an item.
+* * Key difference from 0/1 Knapsack lies in the DP transition:
+* ```
+   t[i][j] = max(val[i-1] + t[i][j - wt[i-1]], t[i-1][j])
+  ```
+* * Helps in understanding how small DP transition changes
+* create entirely different problem behaviors.
+  */
 
 vector<vector<int>> t; // Dp declaration 
 
