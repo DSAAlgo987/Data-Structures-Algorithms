@@ -97,14 +97,14 @@ int minSubsetSum(vector<int> &arr) {
     // Step 3: First fill s1 vector (only include true candidates)
     vector<int> s1; 
     
-    for(int j = 0; j < range/2; j++){
+    for(int j = 0; j <= range/2; j++){
         if(t[n][j] == true)
             s1.push_back(j); 
     }
     
     // Step 4: Identify minized subsetsum difference 
     int mn = INT_MAX; 
-    for(int i = 0; i < range/2; i++) {
+    for(int i = 0; i < s1.size(); i++) {
         mn = min(mn, abs(range - (2 * s1[i]))); 
     }
         
