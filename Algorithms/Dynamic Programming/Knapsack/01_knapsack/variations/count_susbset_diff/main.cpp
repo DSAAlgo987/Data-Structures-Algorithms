@@ -2,85 +2,91 @@
 using namespace std;
 
 /**
- * Problem: Count no. of subsets with given difference.
- * This question is related with count of subset sum.
- *
- * Constraints:
- * 1 <= n <= 100
- */
 
-/*
-    REASON 1:
-    Pehle hum first column ko 1 se initialise kar rahe the,
-    yeh assume karke ki sirf ek hi tarika hai subset sum = 0 banane ka,
-    jo hai empty subset {}.
-    Lekin agar array me 0 present hai,
-    toh subsets banenge: {} aur {0}, dono ka sum 0 hoga.
-    Matlab ek se zyada tarike ho sakte hain sum==0 banane ke.
-    FIX:
-    -> First column ko har row me 1 initialise mat karo.
-    -> Poora table 0 se initialise karo, sirf dp[0][0] = 1 hoga.
-    -> Aur 'j' ka loop 0 se start hoga, 1 se nahi.
-*/
+* PS: Count(#) of subsets with a given difference.
+*
+* Problem:
+* Given an array of integers, count the number of subsets such that
+* the difference between the sum of two subsets is equal to `diff`.
+*
+* IP: vector<int> arr, int diff
+* OP: int (count of valid subsets)
+*
+* APPROACH:
+* Bottom-Up Dynamic Programming (Tabulation)
+*
+* Mathematical reduction:
+* sum(S1) - sum(S2) = diff
+* sum(S1) + sum(S2) = totalSum
+*
+* => sum(S1) = (diff + totalSum) / 2
+*
+* The problem reduces to counting the number of subsets
+* with sum = (diff + totalSum) / 2.
+*
+* TC: O(n * sum)
+* SC: O(n * sum)
+*
+* VARIATION:
+* * Count of Subset Sum
+*
+* LEARNING:
+* * This problem looks different but is a direct variation of subset sum.
+* * The key learning is identifying how to convert a new problem
+* *into a previously solved DP problem.
+* * Once the transformation is clear, the implementation becomes straightforward.
+* * Pattern recognition in DP is more important than memorizing solutions.
+    */
 
-/*
-    REASON 2:
-    Hum target formula use karte hain: target = (diff + totalSum) / 2
-    Lekin yeh tabhi kaam karega jab (diff + totalSum) even hoga,
-    kyunki tabhi target ek whole number banega.
-    Agar odd hai, toh target fractional hoga jo possible nahi hai.
-*/
+// Aliases 
+using v = vector<int>; 
+using vv = vector<v>; 
 
-vector<vector<int>> t;
-int M = 1e9 + 7;
+// # subset sum 
+int countSubsetSum(v &arr, int sum) {
+    int n = arr.size(); 
 
-int countSubsetsDiff(vector<int> &arr, int d)
-{
-    // Code here
-    int n = arr.size();
+    // Step 1: DP Table 
+    vv t(n + 1, v(sum + 1, 0)); // INIT with 0 initially 
 
-    int sumOfArr = 0;
-    // First caculate whole array's sum
-    for (auto i : arr)
-    {
-        sumOfArr += i;
-    }
-
-    // Check feasibility: if odd or d is greater than sum of arr.
-    if ((d + sumOfArr) % 2 != 0 || d > sumOfArr)
-        return 0;
-
-    // Calculate sum1 using the formula:
-    int sum1 = (d + sumOfArr) / 2;
-
-    t.assign(n + 1, vector<int>(sum1 + 1, 0)); // Initialize with all 0s
-
-    t[0][0] = 1;
-    // Start filling remaining parts : n -> i, sum -> j
-    for (int i = 1; i < n + 1; i++)
-    {
-        for (int j = 0; j < sum1 + 1; j++)
-        {
-            if (arr[i - 1] <= j)
-            {
-                t[i][j] = (t[i - 1][j - arr[i - 1]] + t[i - 1][j]) % M;
-            }
-            else
-            {
-                t[i][j] = t[i - 1][j];
+    // Step 2: Initialization: t[i][0] = 1; 
+    for(int i = 0; i < n + 1; i++) 
+        t[i][0] = 1; 
+    
+    // Step 3: Start filling table, i = 1, j = 1; 
+    for(int i = 1; i < n + 1; i++) {
+        for(int j = 1; j < sum + 1; j++) {
+            if(arr[i-1] <= j) {
+                t[i][j] = t[i-1][j-arr[i-1]] + t[i-1][j];
+            } else {
+                t[i][j] = t[i-1][j];
             }
         }
     }
 
-    return t[n][sum1];
+    // Step 4: Return final ans 
+    return t[n][sum]; 
 }
 
-int main()
-{
-    vector<int> arr = {0, 1, 2, 2, 2, 3, 0, 3, 0, 1};
-    int diff = 12;
+// Count no of subsets with a given difference 
+int countNoSubsets(v &arr, int diff) {
+    // Step 1: First identify sum1 = diff + sum(arr) / 2
+    int sumOfArr = accumulate(arr.begin(), arr.end(), 0); 
 
-    cout << "Final count: " << countSubsetsDiff(arr, diff) << endl;
+    int sum1 = (diff + sumOfArr) / 2; 
 
+    // Step 2: Check the edge cases 
+    if((diff + sumOfArr) % 2 != 0 || diff > sumOfArr) return 0; 
+
+    // Step 3: Final step # subset sum with a calculated sum1 
+    return countSubsetSum(arr, sum1);
+}
+
+int main(){
+    v arr = {1, 1, 2, 3}; 
+    int diff = 1; 
+
+    cout << "Count of Subset Sum With A Given Diff(1): " << countNoSubsets(arr, diff) << endl;
+    
     return 0;
 }
