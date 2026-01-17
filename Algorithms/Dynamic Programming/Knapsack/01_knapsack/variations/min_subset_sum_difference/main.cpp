@@ -114,7 +114,7 @@ int minSubsetSum(vector<int> &arr) {
 
 int main()
 {
-    vector<int> arr = {1, 6, 11, 5};
+    vector<int> arr = {1, 2, 7};
     
     cout << "Min subset sum diff: " << minSubsetSum(arr) << endl; 
     
