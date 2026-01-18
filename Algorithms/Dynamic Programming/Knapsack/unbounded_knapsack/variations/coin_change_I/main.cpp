@@ -1,67 +1,83 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
 /**
- * Problem: Coin change I (Max. # of ways)
- * 
- * ip: 
- * coin[]
- * sum 
- * 
- * op:
- * max. numbmer ways 
- * 
- * Why __uint128_t?
- * - Constraints allow very large counts:
- *      1 <= coins.length <= 300
- *      0 <= amount <= 5000
- * - Worst-case ways grow exponentially (long long overflows easily)
- * - __uint128_t safely handles up to ~3.4e38
- *
- * Complexity:
- * - Time: O(n * sum)
- * - Space: O(n * sum)
- *
- * Constraints:
 
-    1 <= coins.length <= 300
-    1 <= coins[i] <= 5000
-    All the values of coins are unique.
-    0 <= amount <= 5000
- */
+* PS: Coin Change I (Count Maximum Number of Ways)
+*
+* Problem:
+* Given a set of coin denominations and a target sum,
+* determine the total number of distinct ways to
+* make the sum using unlimited coins.
+*
+* IP:
+* * vector<int> coin → available coin denominations
+* * int sum          → target sum
+*
+* OP:
+* * int → total number of valid combinations
+*
+* APPROACH:
+* Bottom-Up Dynamic Programming (Tabulation)
+*
+* TC:
+* * O(n * sum)
+*
+* SC:
+* * O(n * sum)
+*
+* VARIATION:
+* * Subset Sum (Count)
+* * Unbounded Knapsack
+*
+* KEY IDEA:
+* * Each coin can be used multiple times.
+* * Order of coins does NOT matter (combinations).
+* * When a coin is chosen, stay on the same index to allow reuse.
+*
+* LEARNING:
+* * Identified Coin Change as an Unbounded Knapsack problem.
+* * Reused Subset Sum (count) DP pattern with slight modification.
+* * Understood the importance of problem mapping.
+* * Reinforced the habit of reducing new problems to already solved DP patterns.
+  */
 
-int coinChange(vector<int> coin, int sum){
-    using u128 = __uint128_t; // alias for 128-bit unsigned integer
-    int n = coin.size();
+// Aliases 
+using v = vector<int>; 
+using vv = vector<v>; 
 
-    vector<vector<u128>> t(n + 1,
-                               vector<u128>(amount + 1, 0)); // Declaration
+// Coin Change I 
+int coinChange(v &coin, int sum) {
+    int n = coin.size(); 
 
-    // Initialization 
-    for(int i = 0; i < n + 1; i++){
+    // Step 1: DP Table 
+    vv t(n + 1, v(sum + 1, 0)); // Initially, INIT with 0 
+
+    // Step 2: Initialization, t[i][0] = 1; 
+    for(int i = 0; i < n + 1; i++) 
         t[i][0] = 1; 
-    }
 
-    // Now, Start filling inner parts: i -> n, j -> sum
-    for(int i = 1; i < n + 1; i++){
-        for(int j = 1; j < sum + 1; j++){
-            if(coin[i-1] <= j){
-                t[i][j] = t[i][j - coin[i-1]] + t[i-1][j];
-                // # of ways -> (+)
-            }else { 
-                t[i][j] = t[i-1][j];
+    // Step 3: Start filling, i = 1, j = 1; 
+    for(int i = 1; i < n + 1; i++) {
+        for(int j = 1; j < sum + 1; j++) {
+            if(coin[i-1] <= j) {
+                t[i][j] = t[i][j-coin[i-1]] + t[i-1][j]; // Here # possible ways 
+            } else {
+                t[i][j] = t[i-1][j]; 
             }
         }
     }
 
-    return (int)t[n][sum];
+    // Step 4: Return final ans 
+    return t[n][sum]; 
 }
 
-int main(){
-    vector<int> coin = {1, 2, 5};
-    int sum = 11;
 
-    cout << coinChange(coin, sum) << endl; // OP: 5
-    
+int main() { 
+    v coin = {1, 2, 3};
+    int sum = 5; 
+
+    cout << "Mx # of ways: " << coinChange(coin, sum) << endl; 
+
     return 0;
 }
