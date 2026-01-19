@@ -3,7 +3,8 @@ using namespace std;
 
 /**
  * PS: LCS (Longest Common Subsequence)
- * Problem:
+ * Problem: Given two strings text1 and text2, return the length of their 
+ * longest common subsequence. If there is no common subsequence, return 0.
  *
  * IP: string x, string y
  * OP: Return length of the Longest Common Subsequence
