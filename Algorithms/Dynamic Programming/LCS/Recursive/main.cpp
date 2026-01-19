@@ -2,29 +2,40 @@
 using namespace std;
 
 /**
- * Problem Statement: Longest common subsequence 
- * 
- * Ip:
- * string x, y;
- * 
- * Op:
- * Display Length of LCS 
+ * PS: LCS (Longest Common Subsequence)
+ * Problem:
+ *
+ * IP: string x, string y
+ * OP: Return length of the Longest Common Subsequence
+ *
+ * APPROACH: Pure Recursion
+ *
+ * TC: O(2^(m + n))
+ *  - At each step we branch into two recursive calls in worst case
+ *
+ * SC: O(m + n)
+ *  - Due to recursion stack depth
+ *
+ * LEARNING:
+ *  - How to break the problem using recursion
+ *  - How character match reduces problem size diagonally
+ *  - Why overlapping subproblems lead to exponential time
+ *  - Motivation for DP (Memoization / Tabulation)
  */
 
-// Recursive Approach: 2^(m + n)
-int LCS(string x, string y, int m, int n) {
-    // Base condition 
-    if(n == 0 || m == 0) { 
-        return 0;
-    }
+// LCS 
+int LCS(string &x, string &y, int n, int m) {
+    // BC 
+    if(n == 0 || m == 0) return 0; // lcs length 
 
-    // Choice diagram 
-    if(x[m-1] == y[n-1]) {
-        return 1 + LCS(x, y, m - 1, n - 1);
-    } else {
+    // Choice Diagram 
+    // Char matches
+    if(x[n-1] == y[m-1]) {
+        return 1 + LCS(x, y, n - 1, m - 1);
+    } else { 
         return max(
-            LCS(x, y, m, n-1),
-            LCS(x, y, m-1, n)
+            LCS(x, y, n, m - 1), 
+            LCS(x, y, n - 1, m)
         );
     }
 }
