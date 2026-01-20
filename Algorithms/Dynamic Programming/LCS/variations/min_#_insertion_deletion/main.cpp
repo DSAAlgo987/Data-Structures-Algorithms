@@ -2,13 +2,24 @@
 using namespace std;
 
 /**
- * Problem Statement: Min. no of insertion and deletion to convert a -> b.
+ * PS: Min # of Insertion & Deletion 
+ * Problem: You are given two strings. In those strings you can apply insertion and deletion operations to make it identical. 
  * 
- * ip: 
- * string a, b;
+ * IP: String a, b;
+ * OP: Return min # of insertion and deletion (int);
  * 
- * op:
- * # of insertion + # of deletion 
+ * APPROACH: Bottom up/ Tabulation
+ * 
+ * TC: O(m * n) -> Computation of LCS table 
+ * SC: O(m * n) -> LCS Table Storage
+ * 
+ * VARIATION: LCS Pattern 
+ * 
+ * LEARNING: 
+ *  - Identification of LCS Pattern
+ *  - Similarity with LCS 
+ *  - Code Variation 
+ * 
  */
 
 int LCS(string a, string b) {
