@@ -2,16 +2,25 @@
 using namespace std;
 
 /**
- * Problem Statement: Longest Palindromic Subsequence (LPS)
+ * PS: Longest Palindromic Subsequence (LPS) 
+ * Problem: You are given one string a as an input. 
+ * Your task is to find the length of LPS.
  * 
- * ip:
- * string a;
+ * IP: String a;
+ * OP: Return Length of LPS (int);
  * 
- * op:
- * return length of LPS
+ * APPROACH: Bottom up/ Tabulation 
  * 
- * Insights : 
- * LPS(a) = LCS(a, reverse(a));
+ * TC: O(n * n) -> DP table computation 
+ * SC: O(n * n) -> DP table storage 
+ * 
+ * VARIATION: LCS
+ * 
+ * LEARNING: 
+ *  - LPS is subset of LCS 
+ *  - Identification of LCS
+ *  - Similarities with LCS 
+ *  - Code Variation  
  */
 
 int LCS(string a, string b) {
