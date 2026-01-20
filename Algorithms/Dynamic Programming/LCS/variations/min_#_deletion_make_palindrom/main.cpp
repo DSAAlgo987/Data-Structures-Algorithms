@@ -1,13 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 /**
- * Problem Statement: Min number of deletions to make it a palindrome.
+ * PS: Min # of deletion in string to make it a palindromic string.
+ * Problem: You are given a string s and your task to return the
+ * min # of deletion required to make that string palindrom.
  * 
- * ip:
- * string a;
+ * IP: string s; 
+ * OP: Min # of deletion (int);
  * 
- * op:
- * length of min # of deletion.
+ * APPROACH: Bottom up/ Tabulation
+ * 
+ * FORMULA: MinDeletion = Len(s) - LCS(s, reverseOfS);
+ * 
+ * TC: O(n * n) 
+ * SC: O(n * n)
+ * 
+ * VARIATION: LCS 
+ * 
+ * LEARNING: 
+ *  - Identification of LCS  
+ *  - Similarities with LCS 
+ *  - Reduction to the LCS problem
+ * 
  */
 
 int LCS(string a, string b) {
