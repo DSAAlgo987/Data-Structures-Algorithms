@@ -1,46 +1,61 @@
-#include <bits/stdc++.h>
-using namespace std;
-/**
- * Problem Statement: Shortest Common SuperSequence 
- * 
- * ip: 
- * string a;
- * string b;
- * 
- * op: 
- * Display length of shortest super sequence
- */
-int LCS(string a, string b, int m, int n) {
-    vector<vector<int>> t(m+1, vector<int>(n+1, 0)); // Declaration with 0 initialization
+#include <bits/stdc++.h> 
+using namespace std; 
 
-    // Start filling main table : i-> m, j -> n
-    for(int i = 1; i < m +1; i++) {
-        for(int j = 1; j < n + 1; j++) {
-            // Match 
-            if(a[i-1] == b[j-1]) {
+/**
+ * PS: Shortest Common Supersequence (SCS)
+ * Problem: You are given two strings a, b and you have to find the SCS length 
+ * IP: String a, b; 
+ * OP: Return SCS length (int) 
+ * APPROACH: Bottom up/ Tabulation 
+ * TC: O(m * n) 
+ * SC: O(m * n) 
+ * VARIATION: LCS
+ * LEARNING: 
+ *  - Depth understanding about sequence 
+ *  - How it is related with LCS Pattern 
+ *  - In sequence -> order matters + discontinuity 
+ */
+
+// Aliases
+using v = vector<int>; 
+using vv = vector<v>; 
+
+// Longest Common Subsequence 
+int LCS(string &x, string &y, int m, int n) { 
+    // Step 1: DP Table with INIT 
+    vv t(m + 1, v(n + 1, 0)); 
+
+    // Step 2: Start filling , i = 1, j = 1;    
+    for(int i = 1; i < m + 1; i++) {
+        for(int j = 1; j < n + 1; j++) { 
+            if(x[i-1] == y[j-1]) {
                 t[i][j] = 1 + t[i-1][j-1];
-            } else { // Not match
+            } else { 
                 t[i][j] = max(
-                   t[i][j-1],
-                   t[i-1][j]
+                    t[i-1][j],
+                    t[i][j-1]
                 );
             }
         }
     }
 
+    // Step 3: Return the final ans 
     return t[m][n];
 }
 
-int shortestSuperSequence(string a, string b, int m, int n) {
-    // 6 + 7 - Length of LCS 
+// Shortest Common Supersequence 
+int SCS(string &a, string &b) { 
+    int m = a.size(); 
+    int n = b.size();
+
     return m + n - LCS(a, b, m, n);
 }
 
+int main() { 
+    string a = "AGGTAB";
+    string b = "GXTXAYB";
 
-int main(){
-    string a = "AGGTAB"; // 6
-    string b = "GXTXAYB"; // 7 
-    
-    cout << shortestSuperSequence(a, b, a.size(), b.size()) << endl; //op: 13 - 4 = 9
+    cout << "SCS Length: " << SCS(a, b); 
+
     return 0;
 }
