@@ -1,27 +1,70 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
 /**
- * Problem: Identify Longest Inreasing Subsequence 
+ * PS: Longest Increasing Subsequence (LIS)
+ * Problem: You are given an array of integer.
+ * Your task is to find the length of LIS.
  * 
- * Ip:
- * array nums;
+ * IP: vector<int> nums; 
+ * OP: (int) => Length of LIS;
  * 
- * op:
- * length of LIS 
+ * APPROACH: Bottom up/ Tabulation 
+ * OPTIMAL APPROACH: Binary Search (nlogn)
+ * 
+ * VARIATION: LCS 
+ * 
+ * TC: O(n^2);
+ * SC: O(n^2);
+ * 
+ * LEARNING: 
+ *  - Identification of LCS 
+ *  - Similarities with LCS 
+ *  - How it different with naive LCS 
+ *  - Handling of edge cases
+ * 
+ * METHODS: 
+ * 1. Unique():
+ * unique(b.begin(), b.end());
+ * It does NOT delete elements
+ * It moves unique elements to the front
+ * It returns an iterator pointing to the new logical end.
+ * 
+ * 2. arr.erase():
+ * b.erase(it, b.end());
+ * Physically removes elements from the vector
+ * Shrinks vector size
+ * Shifts memory left
  */
 
-// Tabular approach: O(n * m)
-int LCS(vector<int> &x, vector<int> &y, int m, int n) {
-    vector<vector<int>> t(m + 1,vector<int>(n + 1, 0)); // Initialization with 0s
+// Aliases 
+using v = vector<int>; 
+using vv = vector<v>;
 
-    // Start filling, remaining cells(sub-problems): i -> m, j -> n
-    for(int i = 1; i < m + 1; i ++) {
-        for(int j = 1; j < n + 1; j++) {
-            // Matching 
-            if(x[i-1] == y[j-1]) {
+// Remove Duplicates
+void removeDuplicates(v &b) { 
+   sort(b.begin(), b.end());
+   a.erase(unique(b.begin(), b.end()), b.end());
+}
+
+// LIS 
+int LIS(v &a) { 
+    int m = a.size(); 
+
+    // Step 1: Derive b vector 
+    v b = a;
+    removeDuplicates(b);
+    int n = b.size();
+
+    // Step 2: LIS DP Table 
+    vv t(m + 1, v(n + 1, 0)); // Initially, INIT with all 0s
+    
+    // Step 3: Start filling, i = 1, j = 1; 
+    for(int i = 1; i < m + 1; i++) { 
+        for(int j = 1; j < n + 1; j++) { 
+            if(a[i-1] == b[j-1]) { 
                 t[i][j] = 1 + t[i-1][j-1];
-            } else {
+            } else { 
                 t[i][j] = max(
                     t[i][j-1],
                     t[i-1][j]
@@ -30,48 +73,13 @@ int LCS(vector<int> &x, vector<int> &y, int m, int n) {
         }
     }
 
+    // Step 4: Return the max Length 
     return t[m][n];
 }
 
 
-// O(n)
-vector<int> removeDuplicates(vector<int> &arr) {
-    // Base case 
-    if(arr.size() <= 1) {
-        return arr;
-    }
-    // start from 1st element 
-    int j = 0;
-    for(int i = 1; i < arr.size(); i++) {
-        if(arr[i] != arr[j]){
-            j++;
-            arr[j] = arr[i];
-        }
-    }
-    // Shrink arr size;
-    arr.resize(j + 1);
+int main() { 
+    v nums = {3, 10, 3, 2, 1, 20};
 
-    // Return array after removing duplicates
-    return arr;
-}
-
-// Time complexity: O(m * n)
-int lengthOfLIS(vector<int> &nums) {
-    // b vector is hidden: it is sorted and not duplicate vector of nums(a)
-    vector<int> b = nums;
-    // Sort b vector 
-    sort(b.begin(), b.end()); // nlogn
-    b = removeDuplicates(b);
-
-    return LCS(nums, b, nums.size(), b.size());
-}
-
-
-
-int main(){
-    vector<int> arr = {10,9,2,5,3,7,101,18};
-
-    cout << lengthOfLIS(arr) << endl;
-    
-    return 0;
+    cout << "LIS Length: " << LIS(nums) << endl;
 }
