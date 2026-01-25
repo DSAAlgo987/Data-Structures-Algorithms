@@ -28,6 +28,7 @@ using namespace std;
 
 
 bool isSubstring(string temp, string r, int m, int n) {
+    // start < m - n this handles overflow (out of bound)
     for(int start = 0; start < m - n; start++) {
         int j = 0; // To reset if discontinue occurs
         
