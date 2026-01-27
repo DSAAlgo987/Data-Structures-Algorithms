@@ -1,42 +1,87 @@
-/* Problem Statement: 
-Maximum Sum Subarray of Size K
-Given an integer array arr of size n and an integer k, find the maximum sum of any contiguous subarray of size k.
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 
-void maxSumSubarray(int arr[], int n, int k){
-    int i = 0, j = 0;
-    int sum = 0; 
-    int mx = INT_MIN;
-    while(j < n){
-        sum += arr[j];
-        // Achieve window size 
-        if((j - i + 1) < k){
-            j++;
-        }else if((j - i + 1) == k){ // Maintain window size
+/**
+ * PS: MX Subarray sum of size k 
+ * PROBLEM: You are given an array. 
+ * Your task is to find mx subarray sum of size k. 
+ * 
+ * IP: vector<int> A, int k; 
+ * OP: Mx subarray sum -> (int)
+ * 
+ * APPROACHES: 
+ *  1. BRUTE FORCE : TC: O(n^2) SC: O(1)
+ *  2. Sliding Window: TC: O(n) SC: O(1)
+ * 
+ * LEARNING: 
+ *  - How to do this with brute force approach
+ *  - How to identify redundency 
+ *  - Convert it into optimized soln by minimizing time complexity 
+ */
+
+// Aliases 
+using v = vector<int>;
+
+// Brute force approach 
+int solve(v &A, int k) { 
+    int mx = INT_MIN; 
+    int n = A.size(); 
+    
+    // Step 1: Generate possible subarrays -> n - k + 1
+    for(int i = 0; i < n - k + 1; i++) { 
+        int sum = 0; 
+        
+        // Step 2: While generating subarrays, calculate sum 
+        for(int j = i; j < i + 3; j++) { 
+            sum += A[j]; 
+        }
+        
+        // Step 3: After sum identify max sum 
+        mx = max(mx, sum); 
+    }
+
+    // Step 4: Return the final mx 
+    return mx; 
+}
+
+// Sliding window approach 
+int subarraySum(v &A, int k) { 
+    int n = A.size();
+    
+    int mx = INT_MIN, sum = 0;
+    int i = 0, j = 0; 
+    
+    // Sliding window 
+    while(j < n) { 
+        // Calc 
+        sum += A[j];
+        
+        // Achieving WS 
+        if(j - i + 1 < k) j++; 
+        
+        // Hit WS 
+        else if (j - i + 1) { 
+            // Calc -> mxSum 
             mx = max(mx, sum);
-            sum -= arr[i];
-            i++;
-            j++;
+            
+            // Maintain Window Size 
+            sum -= A[i]; 
+            i++; 
+            j++; 
         }
     }
+    
+    // Return the final ans 
+    return mx; 
+}
 
-    cout << mx << endl;
-} 
 
-int main(){
-    int n, k;
-    cin >> n >> k;
+int main() { 
+    v A = {1, 2, 3, 4, 5};
+    int k = 3; 
 
-    int arr[n];
+    cout << solve(A, k) << endl; 
+    cout << subarraySum(A, k) << endl;
 
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-    }
-
-    maxSumSubarray(arr, n, k);
-
-    return 0;
+    return 0; 
 }
