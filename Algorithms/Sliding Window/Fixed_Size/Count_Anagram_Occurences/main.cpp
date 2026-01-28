@@ -1,59 +1,103 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void solve(string &p, string &txt){
-    unordered_map<char, int> winChar;
+/**
+ * PS: # occurrences of anagrams 
+ * 
+ * PROBLEM: You are given two strings s, ptn of different length.
+ * Your task it to find # occurrences of anagrams. 
+ * 
+ * IP: String s, ptn; 
+ * OP: # -> (int);
+ * 
+ * APPROACH: 
+ *  1. Brute Force: TC: O(n^2), SC: O(n) 
+ *  2. Sliding window: TC: O(n), SC: O(n)
+ * 
+ * LEARNING: 
+ *  - Count is built-in variables in cpp.
+ * 
+ */
 
-    // Count freq of each char of pat
-    for(auto const &c: p){
-        winChar[c]++;
+// Brute force 
+int solve(string s, string ptn) { 
+    int m = s.size(); 
+    int n = ptn.size(); 
+
+    int cnt = 0; 
+
+    // Sort ptn string 
+    sort(ptn.begin(), ptn.end());
+
+    // Generate substring of lenthg n 
+    for(int i = 0; i < m - n + 1; i++) { 
+        string winChar = "";
+        for(int j = i; j < i + n; j++) { 
+            // append s[j] char 
+            winChar += s[j];
+        }
+
+        // Check is it anagram?
+        sort(winChar.begin(), winChar.end());
+
+        if(winChar == ptn) cnt++;
     }
 
-    int i = 0, j = 0, ans = 0, count = winChar.size();
-    int k = p.size();
+    return cnt; 
+}
 
-    // Sliding window
-    while(j < txt.size()){
-        // Calculation 
-        if(winChar.find(txt[j]) != winChar.end()){
-            winChar[txt[j]]--;
-            if(winChar[txt[j]] == 0){
-                count--;
-            }
+// Sliding window
+int countOccurrences(string s, string ptn) { 
+    int m = s.size(); 
+    int n = ptn.size(); 
+
+    // Create unordered map m1 
+    unordered_map<char, int> m1; 
+
+    // Add ptn with freq -> m1 
+    for(auto c: ptn) m1[c]++;
+    
+    int cnt = m1.size(); // Track # of unique letters
+    int ans = 0; 
+
+    // start sliding window 
+    int i = 0, j = 0;
+    while(j < m) { 
+        // Calc
+        if(m1.find(s[j]) != m1.end()) {
+            m1[s[j]]--;
+            
+            if(m1[s[j]] == 0) cnt--;
         }
 
-        // Achieve window size
-        if(j - i + 1 < k){
-            j++;
-        }
-        // Hit window size
-        else if(j - i + 1 == k){
-            // Ans <- Calculation 
-            if(count == 0){
-                ans++;
+        // Achieve ws 
+        if(j - i + 1 < n) j++;
+
+        // hit ws 
+        else if(j - i + 1 == n) { 
+            // ans <- calc 
+            if(cnt == 0) ans++;
+
+            // slide window 
+            if(m1.find(s[i]) != m1.end()) {
+                m1[s[i]]++;
+
+                if(m1[s[i]] == 1) cnt++;
             }
-
-            // Slide window
-            if(winChar.find(txt[i]) != winChar.end()){
-                winChar[txt[i]]++;
-
-                if(winChar[txt[i]] == 1){
-                    count++;
-                }
-            }
-
             i++;
             j++;
         }
     }
 
-    cout << "Ans: " << ans << endl;
+    return ans; 
 }
 
-
 int main(){
-    string txt = "forxxorfxdofr", p = "for";
+    string s = "forrxxorrfxdrrof";
+    string ptn = "forr";
 
-    solve(p, txt); 
+    cout << "#: " << solve(s, ptn) << endl; 
+    cout << "#: " << countOccurrences(s, ptn) << endl;
+    
     return 0;
 }
