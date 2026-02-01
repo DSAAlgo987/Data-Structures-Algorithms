@@ -1,46 +1,82 @@
+#include <iostream>
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
-int solve(vector<int> &A, int n, int k){
-    int i = 0, j = 0, sum = 0, mx = INT_MIN; 
+/**
+ * PS: Longest Subarray of sum k 
+ * 
+ * Problem: You are given an array and a sum k.
+ * Your task is to find out longest subarray having sum k.
+ * 
+ * IP: vector<int> A, int k (sum);
+ * OP: (int) -> longest subarr size;
+ * 
+ * APPROACH: Brute force: TC:O(n^2) SC: O(1)
+ *           Sliding window: TC:O(n) SC: O(1)
+ * 
+ * LEARNING: 
+ *  - Known the difference between fixed and variable sliding window 
+ *  - Identification of variable sliding window
+ */
+ 
+// Aliases 
+using v = vector<int>;
 
-    while(j < n){
-        // Calculation 
-        sum += A[j];
-
-        // Achieve condition 
-        if(sum < k){
+// Longest subarray of sum k 
+int solve(v &A, int k) { 
+    int sum = 0, mx = INT_MIN; 
+    int n = A.size();
+    
+    int i = 0, j = 0; 
+    
+    while(j < n) { 
+        // Calc 
+        sum += A[j]; 
+        
+        // < condition (Achieve condition)
+        if(sum < k) j++; 
+        
+        // hit condition 
+        else if(sum == k) {
+            // ans <- calc 
+            mx = max(mx, j - i + 1); 
+            
+            // slide window 
+            sum -= A[i];
+            i++;
             j++;
         }
-
-        // Hit condition 
-        else if(sum == k){
-            // Ans calculation 
-            mx = max(mx, j - i + 1);
-            j++;
-        }
-
-        else if(sum > k){
-            // Remove ith element if sum > k 
-            while(sum > k){
+        
+        // > condition
+        else if(sum > k) { 
+            // Remove ith calculations 
+            while(sum > k) { 
                 sum -= A[i];
                 i++;
             }
-
-            j++;
+            
+            // again hit conditin 
+            if(sum == k) {
+                // ans <- calc 
+                mx = max(mx, j - i + 1); 
+                
+                // slide window 
+                sum -= A[i];
+                i++;
+                j++;
+            }
         }
     }
-
-    return mx;
+    
+    // Return the ans 
+    return mx == INT_MIN ? 0: mx; 
 }
 
-int main(){
-    vector<int> A = {4, 1, 1, 1, 1, 1};
-
-    int k = 5;
-
-    int ans = solve(A, A.size(), k);
-
-    cout << "Ans: " << ans << endl;
+int main()
+{
+    v A = {1, 2, 3, 2, 2};
+    int k = 5; 
+    
+    cout << "Longest Subarray Size: " << solve(A, k) << endl;
     return 0;
 }
