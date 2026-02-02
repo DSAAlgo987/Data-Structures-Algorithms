@@ -1,56 +1,73 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
 /**
- * Problem: john and his mommy went to mall and john asked his mom to buy toys for him.
- * Mom has two condts: 
- * 1. Line se uthau toys
- * 2. Mx 2 types ke hu 
+ * PS: Pick Toys 
  * 
- * Ip:
- * 1. string : consists of letters that represent toys
- * 2. k : max types 
+ * Problem: You are given an array which consists of toys. 
+ * Your task is to help john to pick Mx quantity of toys of mx two types toys.
+ * John can only pick toys in sequence manner and it can only take two types of toys
+ * maximum.
  * 
- * Op: Return # no toys john can have.
+ * IP: vector<int> A; 
+ * OP: return Mx quantity of toys (int);
+ * 
+ * APPROACH: 
+ *  - Sliding window: 
+ *      - TC: O(n)
+ *      - SC: O(k) for map 
+ * 
+ * LEARNING: 
+ *  - Identification of variable sliding window 
+ *  - Relation with other solved problem 
  */
+ 
+// aliases 
+using umap = unordered_map<char, int>; 
 
-// n
-int pickToys(string &str, int k){
-    int i = 0, j = 0, mx = INT_MIN; 
-    unordered_map<char, int> mp;
+// Global vars 
+int k = 2; // mx two types toys 
 
-    while(j < str.size()){
-        // calculation 
-        mp[str[j]]++;
-
-        if(mp.size() <= k){
-            // ans <- calculation 
-            mx = max(mx, j - i + 1);
-            j++;
+// Pick toys 
+int solve(string &s) { 
+    int i = 0, j = 0, mx = INT_MIN;
+    int n = s.size(); 
+    
+    umap m1; 
+    
+    while(j < n) { 
+        // calc 
+        m1[s[j]]++; 
+        
+        // hit condition 
+        if(m1.size() <= k) { 
+            // ans <- calc 
+            mx = max(mx, j - i + 1); 
+            
+            // expand
+            j++; 
         }
-        else if(mp.size() > k){
-            while(mp.size() > k){
-                mp[str[i]]--;
-
-                if(mp[str[i]] == 0){
-                    mp.erase(str[i]);
-                }
-
+        // > condition 
+        else if(m1.size() > k) {
+            // Shrink: Remove ith calcl 
+            while(m1.size() > k) { 
+                m1[s[i]]--; 
+                
+                if(m1[s[i]] == 0) m1.erase(s[i]);
+                
                 i++;
             }
-
             j++;
         }
     }
-
-    return mx;
+    
+    // Return ans 
+    return mx == INT_MIN ? 0: mx; 
 }
 
-int main(){
+int main() { 
     string s = "abaccab";
-
-    int k = 2;
-
-    cout << pickToys(s, k);
+    
+    cout << "MX QTY of Toys: " << solve(s) << endl;
     return 0;
 }
