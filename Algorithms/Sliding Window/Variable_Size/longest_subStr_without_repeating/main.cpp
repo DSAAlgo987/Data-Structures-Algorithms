@@ -2,70 +2,65 @@
 using namespace std; 
 
 /**
- * PS: Longest substring with k unique chars 
+ * PS: Longest substring without repeating chars.
  * 
- * Problem: You are given a string s and k.
- * Your task is to find out longest substring with k unique chars. 
+ * Problem: You are given a string s. 
+ * Your task is to find out longest substring without repeating chars. 
  * 
- * IP: string s, int k;
- * OP: int -> longest substring size 
+ * IP: string s;
+ * OP: longest length -> <int>;
  * 
  * APPROACH: 
- *  - Sliding window: TC: O(n), SC: O(k)
+ *  - Sliding window: 
+ *      TC: O(n) 
+ *      SC: O(k) for map size 
  * 
  * LEARNING: 
- *  - Identification of variable sliding window
- *  - map to identify unique chars. 
+ *  - Identifiction of variable sliding window 
+ *  - similar with longest substring of k unique chars 
  */
- 
-// aliases 
-using umap = unordered_map<char,int>;
 
-// Longest substring with k unique chars 
-int solve(string &s, int k) { 
-    int n = s.size();
-    int i = 0, j = 0; 
-    int mx = INT_MIN; 
+// aliases 
+using umap = unordered_map<char, int>; 
+
+// Longest substring without repeating chars 
+int solve(string s) { 
+    int n = s.size(), mx = INT_MIN, i = 0, j = 0; 
     
     umap m1; 
     
     while(j < n) { 
         // calc 
-        m1[s[j]]++;
+        m1[s[j]]++; 
         
-        // achieve cond 
-        if(m1.size() < k) j++;
+        // hit condition 
+        if(m1.size() == j - i + 1) { 
+            mx = max(mx, j - i + 1); // ans <- calc 
+            j++;        // expand 
+        }
         
-        // hit cond 
-        else if(m1.size() == k) { 
-            // ans <- calc 
-            mx = max(mx, j - i + 1);
-            j++; // expand 
-        } 
-        // > cond 
-        else if(m1.size() > k) { 
-            // remove ith calc
-            while(m1.size() > k) {
+        // < condition
+        else if(m1.size() < j - i + 1) { 
+            // shrink: remove ith calc 
+            while(m1.size() < j - i + 1){
                 m1[s[i]]--; 
                 
                 if(m1[s[i]] == 0) m1.erase(s[i]);
                 
-                i++; 
+                i++; // shrink 
             }
             
-            j++;
+            j++; 
         }
     }
     
-    // return the ans 
     return mx == INT_MIN ? 0: mx; 
 }
 
 int main()
 {
-    string s = "aabacbebebe";
-    int k = 3; 
+    string s = "pwwkew"; 
     
-    cout << "longest substring size: " << solve(s, k) << endl;
+    cout << "Longest substring length: " << solve(s) << endl;
     return 0;
 }
