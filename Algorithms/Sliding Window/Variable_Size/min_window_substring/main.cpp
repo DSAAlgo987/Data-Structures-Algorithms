@@ -1,65 +1,81 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string minWindow(string s, string t){
-    int i = 0, j = 0, minLen = INT_MAX, start = 0, count = 0;
+/**
+ * PS: Minimum Window Substring
+ *
+ * Problem: Given two strings s and t of lengths m and n respectively, 
+ * return the minimum window substring of s such that every character in t 
+ * (including duplicates) is included in the window. If there is no such substring, 
+ * return the empty string "".
+ * 
+ * IP: String s, t; 
+ * OP: String minimum window substring;
+ * 
+ * APPROACH: 
+ *  - Variable sliding window 
+ *      - TC: O(n)
+ *      - SC: O(k) for m1 map 
+ * 
+ * LEARNING: 
+ *  - Identification of variable sliding window 
+ *  - j used for DEC freq 
+ *  - i used for INC freq 
+ */
+ 
+// Aliases 
+using umap = unordered_map<char,int>; 
 
-    unordered_map<char, int> mp;
-
-    // Store t into map
-    for(auto c: t){
-        mp[c]++;
-    }
-
-    // Store size of unique chars
-    count = mp.size();
-
-    // Sliding window
-    while(j < s.size()){
-        // Calculation 
-        if(mp.find(s[j]) != mp.end()){
-            // Remove freq 
-            mp[s[j]]--;
-
-            // if it becomes 0 
-            if(mp[s[j]] == 0){
-                count--;
-            }
+// Minimum Window Substring 
+string solve(string s, string t) { 
+    umap m1; 
+    int n = s.size(); 
+    
+    // Traverse t string and INC freq 
+    for(auto c: t) m1[c]++; 
+    
+    int mn = INT_MAX, cnt = m1.size(), sIdx = -1;
+    int i = 0, j = 0; 
+    
+    // Slidinw window 
+    while(j < n) { 
+        // S[j] -> present m1?
+        if(m1.find(s[j]) != m1.end()) { 
+            m1[s[j]]--; 
+                
+            if(m1[s[j]] == 0) cnt--; 
+                
         }
-        // if count becomes 0 
-        if(count == 0){
-            // Shrink window by incrementing i when count == 0
-            while(count == 0){
-                if(mp.find(s[i]) != mp.end()){
-                    // INC freq 
-                    mp[s[i]]++;
-
-                    // if char freq becomes 1 
-                    if(mp[s[i]] == 1){
-                        count++;
+        // All letters are used 
+        if(cnt == 0) { 
+            // shrink window & ans <- calc 
+            // ans <- calc 
+            while(cnt == 0) { 
+                if(m1.find(s[i]) != m1.end()) { 
+                    m1[s[i]]++;
+                    if(m1[s[i]] == 1) {
+                        cnt++;
                         // calculate size of that window 
-                        if(j - i + 1 < minLen){
-                            start = i;
-                            minLen = j - i + 1;
+                        if(mn > j - i + 1) { 
+                            mn = j - i + 1; 
+                            sIdx = i; 
                         }
-                    }
+                    } 
                 }
-                i++;
+                i++; 
             }
         }
-
-        j++;
+        
+        j++; // expand
     }
-
-    if(minLen == INT_MAX) return "";
-    // substr(pos, len)
-    return s.substr(start, minLen);
+    
+    // return ans 
+    return sIdx == -1 ? "empty": s.substr(sIdx, mn); 
 }
 
-int main(){
-    string s = "TOTMTAPTAT";
-    string t = "TAT";
-
-    cout << minWindow(s, t) << endl;
-    return 0;
+int main () {
+    string s = "timetopractice"; 
+    string t = "toc"; 
+    
+    cout << "Min Window Substr: " << solve(s, t) << endl;
 }
