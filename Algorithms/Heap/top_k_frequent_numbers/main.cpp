@@ -21,6 +21,36 @@ using namespace std;
 using v = vector<int>;
 using p = pair<int, int>;
 
+
+// Brute Force: O(nlgn)
+
+class Solution {
+public:
+    using v = vector<int>;
+    using p = pair<int, int>; // <freq, #>
+    using umap = unordered_map<int, int>; // < #, freq>
+
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+          umap m; 
+
+          for(auto x: nums) m[x]++;
+
+          vector<p> vp; 
+
+          // convert map to vv 
+          for(auto [first, second]: m) vp.push_back({second, first});
+
+          // sort based on freq (DESC) using greater<>() comparator function 
+          sort(vp.begin(), vp.end(), greater<p>());
+
+          // compute the final ans 
+          v ans; 
+          for(int  i = 0 ; i < k; i++) ans.push_back(vp[i].second);
+
+          return ans; 
+    }
+};
+
 void printv(v &arr) {
     for(auto i: arr) {
         cout << i << " ";
