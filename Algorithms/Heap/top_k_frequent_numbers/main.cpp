@@ -15,6 +15,8 @@ using namespace std;
  * 
  * Approach 2: Map + minHeap 
  * Time complexity: n + nlogk
+ * 
+ * LEARNING: FREQ Sort = Bucket sort + Map 
  */
 
 // Aliases
@@ -50,6 +52,37 @@ public:
           return ans; 
     }
 };
+
+// optimized approach : Bucket sort 
+class Solution {
+public:
+    using v = vector<int>;
+    using vv = vector<v>; 
+
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        int n = nums.size(); 
+        // Step 1: create map
+        map<int, int> m; // <#, f> 
+        for(auto x: nums) m[x]++;
+
+        // Step 2: create buckets 
+        vv buckets(n + 1); 
+        
+        for(auto [x, freq]: m) buckets[freq].push_back(x); 
+
+        // Step 3: Traverse from high freq and  there should k most freq elements 
+        v ans; 
+        for(int  i = n; i > -1 && ans.size() < k; i--) { 
+            for(auto x: buckets[i]) { 
+                ans.push_back(x);
+
+                if(ans.size() == k) break; 
+            }
+        }
+        return ans; 
+     }
+};
+
 
 void printv(v &arr) {
     for(auto i: arr) {
