@@ -2,60 +2,82 @@
 using namespace std;
 
 /**
- * Problem Statement: Implement Breadth First Search 
- * It uses Queue internally and which follow fifo pattern
+ * Graph Traversing: 
+ *  1. BFS: Breadth First Search 
+ *  It traverses level by level 
+ *  It identifies the shallowest node
+ *  Internally, it uses Queue DS for implementation
  * 
- * ip:
- * Adj_list / Adj_matrix 
- *  
- * op:
- * display BFS
+ *  Algo: 
+ *  1. Visiting 
+ *  2. Explore all it's neighbour nodes (adjacent nodes)
+ * 
+ *  A: 
+ *      TC: O(V + E) 
+ *      SC: O(V) for Q and Visited 
  */
+ 
+// Aliases
+using v = vector<int>; 
+using vv = vector<v>; 
 
-/**
- * Time Complexity: 
- *  Adj List: O(V + E)
- *  Adj Matrix: O(V^2)
- */
-void BFS(vector<vector<int>> &adjList, int n, list<int> q) {
-    vector<int> visited(n, false); // To track which vertices are visited
+// adjList
+vv adjList() { 
+    int n, m; 
+    cin >> n >> m; 
+    
+    vv adj(n); 
+    
+    for(int i = 0; i < m; i++) { 
+         int u , v;
+         cin >> u >> v; 
+         
+         adj[u].push_back(v);
+         adj[v].push_back(u);
+    }
+    
+    return adj;
+}
 
-    // Iterate all over the vertices until all the vertices are traversed
-    while(!q.empty()) {
-        int currentNode = q.front(); // Get that node 
-
-        cout << currentNode << " "; // Display it 
-
-        q.pop_front(); // Remove it from the front
-        visited[currentNode] = true;
-
-        // Push the connected nodes of currentNode to the Q
-        for(auto &child: adjList[currentNode]) {
-            // Not visited
+// BFS: Breadth First Search 
+void bfs(vv &adj, int src) { 
+    int n = adj.size(); 
+    
+    v visited(n, false);
+    list<int> q; 
+    
+    q.push_back(src);
+    visited[src] = true; // mark immediately
+    
+    while(!q.empty()) { 
+        // 1. visiting 
+        int currNode = q.front();
+        cout << currNode << " ";
+        q.pop_front(); 
+        
+        
+        // 2. Exploring all it's neighbour vertices 
+        for(auto &child: adj[currNode]) {
             if(!visited[child]) {
-                q.push_back(child);
+                visited[child] = true; 
+                q.push_back(child); 
             }
         }
     }
 }
 
-int main(){
-    vector<vector<int>> adjList = {
-        {0},
-        {2, 4}, // 1
-        {1, 3}, // 2
-        {2},    // 3
-        {1, 5}, // 4
-        {4}     // 5
+int main() {
+    vv adj = {
+        {1, 2, 3},
+        {0, 2},
+        {0, 1, 3, 4},
+        {0, 2, 4},
+        {2, 3, 5, 6},
+        {4}, 
+        {4}, 
     };
-
-    int src = 1;
-
-    list<int> q;
-    // Initially insert src node 
-    q.push_back(src);
-
-    BFS(adjList, adjList.size(), q); // OP: 1 2 4 3 5
     
-    return 0;
+    bfs(adj, 0); 
+    
+    return 0; 
 }
