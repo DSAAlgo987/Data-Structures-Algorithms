@@ -17,11 +17,11 @@ void Merge(int A[] , int l , int mid , int h){
         B[k++] = A[i];
     }
     for(; j<=h ; j++){
-        B[k++] = A[i];
+        B[k++] = A[j];
     }
     
     // copy all elements from B to A 
-    for(i = 0; i <= h ; i++){
+    for(i = l; i <= h ; i++){
         A[i] = B[i];
     }
 }
